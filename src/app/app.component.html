@@ -1,15 +1,24 @@
-<p-tabView>
-  <p-tabPanel header="Aba I" leftIcon="pi pi-calendar">
-     Content 1
-  </p-tabPanel>
-  <p-tabPanel header="Aba II">
-      Content 2
-  </p-tabPanel>
-  <p-tabPanel header="Aba III">
-      Content 3
-  </p-tabPanel>
-  <p-tabPanel header="Aba IV" leftIcon="fa fa-bell-o" rightIcon="fa fa-bookmark-o">;
-    Content
-  </p-tabPanel>
-</p-tabView>
+<div class="container">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <h1>Lançamentos</h1>
+    </div>
 
+    <div class="ui-g-12 ui-fluid">
+      <label for="descricao-id">Descrição</label>
+      <input type="text" id="descricao-id" pInputText>
+    </div>
+
+    <div class="ui-g-12">
+      <label style="display: block;">Vencimento</label>
+      <input type="text" size="10" pInputText>
+
+      <label>até</label>
+      <input type="text" size="10" pInputText>
+    </div>
+
+    <div class="ui-g-12">
+      <button pButton type="submit" label="Pesquisar" class="ui-button-rounded"></button>
+    </div>
+  </div>
+</div>
