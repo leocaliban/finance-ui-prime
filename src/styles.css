@@ -8,6 +8,20 @@ label{
   font-weight: bold;
 }
 
+.col-valor {
+  width: 120px;
+  text-align: right;
+}
+
+.col-valor-h {
+  width: 120px;
+}
+
+.col-data {
+  width: 120px;
+  text-align: center;
+}
+
 @media (min-width: 1200px){
   .container {
     width: 1170px;
