@@ -22,6 +22,11 @@ label{
   text-align: center;
 }
 
+.col-operacoes{
+  width: 110px;
+  text-align: center;
+}
+
 @media (min-width: 1200px){
   .container {
     width: 1170px;
