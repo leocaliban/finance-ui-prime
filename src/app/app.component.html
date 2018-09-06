@@ -48,8 +48,8 @@
               <span [ngStyle]="{ color: getCorValor(lancamento.tipo) }">{{lancamento.valor}}</span>
             </td>
             <td class="col-operacoes">
-              <button pButton icon="fa fa-pencil"></button>
-              <button pButton icon="fa fa-trash"></button>
+              <button pButton icon="fa fa-pencil" pTooltip="Editar" tooltipPosition="top"></button>
+              <button pButton icon="fa fa-trash" pTooltip="Excluir" tooltipPosition="top"></button>
             </td>
           </tr>
         </ng-template>
