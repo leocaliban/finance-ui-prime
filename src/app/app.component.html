@@ -24,7 +24,7 @@
 
   <div class="ui-g">
     <div class="ui-g-12">
-      <p-table [value]="lancamentos" [paginator]="true" [rows]="3">
+      <p-table [value]="lancamentos" [paginator]="true" [rows]="3" [responsive]=true>
         <ng-template pTemplate="header">
           <tr>
             <th>Tipo</th>
@@ -39,17 +39,37 @@
 
         <ng-template pTemplate="body" let-lancamento>
           <tr>
-            <td>{{lancamento.tipo}}</td>
-            <td>{{lancamento.pessoa}}</td>
-            <td>{{lancamento.descricao}}</td>
-            <td class="col-data">{{lancamento.dataVencimento}}</td>
-            <td class="col-data">{{lancamento.dataPagamento}}</td>
+            <td>
+              <span class="ui-column-title">Tipo</span>
+              {{lancamento.tipo}}
+            </td>
+            <td>
+              <span class="ui-column-title">Pessoa</span>
+              {{lancamento.pessoa}}
+            </td>
+            <td>
+              <span class="ui-column-title">Descrição</span>
+              {{lancamento.descricao}}
+            </td>
+            <td class="col-data">
+              <span class="ui-column-title">Vencimento</span>
+              {{lancamento.dataVencimento}}
+            </td>
+            <td class="col-data">
+              <span class="ui-column-title">Pagamento</span>
+              {{lancamento.dataPagamento}}
+            </td>
             <td class="col-valor">
-              <span [ngStyle]="{ color: getCorValor(lancamento.tipo) }">{{lancamento.valor}}</span>
+              <span class="ui-column-title">Valor</span>
+              <span [ngStyle]="{ color: getCorValor(lancamento.tipo) }">
+                {{lancamento.valor}}
+              </span>
             </td>
             <td class="col-operacoes">
-              <button pButton icon="fa fa-pencil" pTooltip="Editar" tooltipPosition="top"></button>
-              <button pButton icon="fa fa-trash" pTooltip="Excluir" tooltipPosition="top"></button>
+              <button pButton icon="fa fa-pencil" pTooltip="Editar" tooltipPosition="top"
+                class="ui-button-rounded"></button>
+              <button pButton icon="fa fa-trash" pTooltip="Excluir" tooltipPosition="top"
+                class="ui-button-rounded"></button>
             </td>
           </tr>
         </ng-template>
