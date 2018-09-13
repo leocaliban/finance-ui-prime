@@ -11,7 +11,7 @@ export class LancamentosPesquisaComponent implements OnInit {
     {
       tipo: 'DESPESA',
       descricao: 'Compra de pão',
-      dataVencimento: '30/06/2017',
+      dataVencimento: new Date(2017, 6, 30),
       dataPagamento: null,
       valor: 4.55,
       pessoa: 'Padaria Pão Novo'
@@ -19,15 +19,15 @@ export class LancamentosPesquisaComponent implements OnInit {
     {
       tipo: 'RECEITA',
       descricao: 'Aluguel',
-      dataVencimento: '11/03/2018',
-      dataPagamento: '11/03/2018',
+      dataVencimento: new Date(2018, 3, 11),
+      dataPagamento: new Date(2018, 3, 11),
       valor: 220.00,
       pessoa: 'Jack Bauer'
     },
     {
       tipo: 'DESPESA',
       descricao: 'Conta de Água',
-      dataVencimento: '11/05/2018',
+      dataVencimento: new Date(2018, 5, 11),
       dataPagamento: null,
       valor: 100.00,
       pessoa: 'James Lancer'
@@ -35,17 +35,17 @@ export class LancamentosPesquisaComponent implements OnInit {
     {
       tipo: 'RECEITA',
       descricao: 'Salário',
-      dataVencimento: '11/09/2018',
-      dataPagamento: '11/09/2018',
+      dataVencimento: new Date(2018, 9, 11),
+      dataPagamento: new Date(2018, 6, 19),
       valor: 990.00,
       pessoa: 'Rafael Lima'
     },
     {
       tipo: 'DESPESA',
       descricao: 'Cervejas',
-      dataVencimento: '05/04/2018',
-      dataPagamento: '05/04/2018',
-      valor: 90.00,
+      dataVencimento: new Date(2018, 5, 4),
+      dataPagamento: new Date(2018, 5, 4),
+      valor: 90000.00,
       pessoa: 'Zeca'
     }
   ];
