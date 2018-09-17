@@ -19,6 +19,7 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { DropdownModule } from 'primeng/dropdown';
 
 import { CurrencyMaskModule } from 'ng2-currency-mask';
+import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
 
 
 
@@ -28,7 +29,8 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
     LancamentosPesquisaComponent,
     NavbarComponent,
     PessoasPesquisaComponent,
-    LancamentoCadastroComponent
+    LancamentoCadastroComponent,
+    PessoaCadastroComponent
   ],
   imports: [
     BrowserModule,
