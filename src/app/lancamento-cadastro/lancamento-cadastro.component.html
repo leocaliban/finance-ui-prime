@@ -32,12 +32,12 @@
 
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label for="categoria-id">Categoria</label>
-        <input type="text" id="categoria-id" pInputText>
+        <p-dropdown [options]="categorias" [autoWidth]="false" placeholder="Selecione"></p-dropdown>
       </div>
 
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label for="pessoa-id">Pessoa</label>
-        <input type="text" id="pessoa-id" pInputText>
+        <p-dropdown [options]="pessoas" [autoWidth]="false" placeholder="Selecione" [filter]="true"></p-dropdown>
       </div>
 
       <div class="ui-g-12 ui-fluid">
