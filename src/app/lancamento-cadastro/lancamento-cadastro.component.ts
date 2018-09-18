@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-lancamento-cadastro',
   templateUrl: './lancamento-cadastro.component.html',
-  styleUrls: ['./lancamento-cadastro.component.css']
+  styleUrls: ['./lancamento-cadastro.component.css'],
+  providers: [MessageService]
 })
 export class LancamentoCadastroComponent implements OnInit {
 

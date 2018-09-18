@@ -6,7 +6,7 @@
       </div>
 
       <div class="ui-g-12">
-          <p-selectButton [options]="tipos" #tipo></p-selectButton>
+        <p-selectButton [options]="tipos" #tipo></p-selectButton>
       </div>
 
 
@@ -22,13 +22,19 @@
 
       <div class="ui-g-12 ui-md-9 ui-fluid">
         <label for="descricao-id">Descrição</label>
-        <input type="text" id="descricao-id" pInputText>
+        <input type="text" id="descricao-id" pInputText name="descricao" ngModel #descricao="ngModel" required
+          minlength="5">
+
+        <div>
+          <p-message severity="error" text="Informe uma descrição" *ngIf="descricao.hasError('required') && descricao.dirty"></p-message>
+
+          <p-message severity="error" text="Mínimo {{ descricao.errors.minlength.requiredLength }} caracteres." *ngIf="descricao.hasError('minlength') && descricao.dirty"></p-message>
+        </div>
       </div>
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
         <label for="valor-id">Valor</label>
-        <input type="text" id="valor-id" placeholder="0,00" pInputText currencyMask
-          [options]="{ prefix: 'R$', thousands: '.', decimal: ',', allowNegative: false }">
+        <input ngModel name="valor" type="text" id="valor-id" placeholder="0,00" pInputText currencyMask [options]="{ prefix: 'R$', thousands: '.', decimal: ',', allowNegative: false }">
       </div>
 
       <div class="ui-g-12 ui-md-6 ui-fluid">
