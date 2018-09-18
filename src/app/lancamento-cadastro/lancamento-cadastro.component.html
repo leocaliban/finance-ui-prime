@@ -28,7 +28,7 @@
         <div>
           <p-message severity="error" text="Informe uma descrição" *ngIf="descricao.hasError('required') && descricao.dirty"></p-message>
 
-          <p-message severity="error" text="Mínimo {{ descricao.errors.minlength.requiredLength }} caracteres." *ngIf="descricao.hasError('minlength') && descricao.dirty"></p-message>
+          <p-message severity="error" text="Mínimo {{ descricao?.errors.minlength.requiredLength }} caracteres." *ngIf="descricao.hasError('minlength') && descricao.dirty"></p-message>
         </div>
       </div>
 
