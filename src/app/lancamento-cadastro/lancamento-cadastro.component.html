@@ -1,18 +1,21 @@
 <div class="container">
-  <form>
+  <form #lancamentoForm="ngForm">
     <div class="ui-g">
       <div class="ui-g-12">
         <h1>Novo Lançamento</h1>
       </div>
 
       <div class="ui-g-12">
-        <p-selectButton [options]="tipos" #tipo></p-selectButton>
-      </div>
+        <p-selectButton [options]="tipos" #tipo name="tipoLancamento" ngModel #tipoLancamento="ngModel" required></p-selectButton>
 
+        <app-mensagem [control]="tipoLancamento" erro="required" texto="Selecione um tipo."></app-mensagem>
+      </div>
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
         <label for="vencimento-id">Vencimento</label>
-        <p-calendar dateFormat="dd/mm/yy"></p-calendar>
+        <p-calendar dateFormat="dd/mm/yy" name="dataVencimento" ngModel #dataVencimento="ngModel" required></p-calendar>
+
+        <app-mensagem [control]="dataVencimento" erro="required" texto="Informe uma data de vencimento."></app-mensagem>
       </div>
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
@@ -25,26 +28,34 @@
         <input type="text" id="descricao-id" pInputText name="descricao" ngModel #descricao="ngModel" required
           minlength="5">
 
-        <div>
-          <p-message severity="error" text="Informe uma descrição" *ngIf="descricao.hasError('required') && descricao.dirty"></p-message>
-
-          <p-message severity="error" text="Mínimo {{ descricao?.errors.minlength.requiredLength }} caracteres." *ngIf="descricao.hasError('minlength') && descricao.dirty"></p-message>
-        </div>
+        <app-mensagem [control]="descricao" erro="required" texto="Informe uma descrição."></app-mensagem>
+        <app-mensagem [control]="descricao" erro="minlength" texto="Mínimo {{ descricao?.errors?.minlength?.requiredLength }} caracteres."></app-mensagem>
       </div>
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
         <label for="valor-id">Valor</label>
-        <input ngModel name="valor" type="text" id="valor-id" placeholder="0,00" pInputText currencyMask [options]="{ prefix: 'R$', thousands: '.', decimal: ',', allowNegative: false }">
+        <input type="text" id="valor-id" placeholder="0,00" pInputText currencyMask [options]="{ prefix: 'R$',  thousands: '.', decimal: ',', allowNegative: false }"
+          name="valor" ngModel #valor="ngModel" required>
+
+        <app-mensagem [control]="valor" erro="required" texto="Informe o valor."></app-mensagem>
       </div>
 
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label for="categoria-id">Categoria</label>
-        <p-dropdown [options]="categorias" [autoWidth]="false" placeholder="Selecione"></p-dropdown>
+
+        <p-dropdown id="categoria-id" [options]="categorias" [autoWidth]="false" placeholder="Selecione" name="categoria"
+          ngModel #categoria="ngModel" required>
+        </p-dropdown>
+
+        <app-mensagem [control]="categoria" erro="required" texto="Selecione uma categoria."></app-mensagem>
       </div>
 
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label for="pessoa-id">Pessoa</label>
-        <p-dropdown [options]="pessoas" [autoWidth]="false" placeholder="Selecione" [filter]="true"></p-dropdown>
+        <p-dropdown id="pessoa-id" [options]="pessoas" [autoWidth]="false" placeholder="Selecione" [filter]="true" name="pessoa"
+          ngModel #pessoa="ngModel" required></p-dropdown>
+
+        <app-mensagem [control]="pessoa" erro="required" texto="Selecione uma pessoa."></app-mensagem>
       </div>
 
       <div class="ui-g-12 ui-fluid">
@@ -53,7 +64,8 @@
       </div>
 
       <div class="ui-g-12">
-        <button pButton type="submit" label="Salvar" icon="fa fa-check" class="ui-button-rounded ui-button-success">
+        <button pButton type="submit" label="Salvar" icon="fa fa-check" class="ui-button-rounded ui-button-success"
+          [disabled]="!lancamentoForm.valid">
         </button>
 
         <button pButton type="submit" label="Novo" icon="pi pi-plus" class="ui-button-rounded ui-button-info">

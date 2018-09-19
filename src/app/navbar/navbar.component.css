@@ -5,10 +5,12 @@
 
 .navbar-toggle{
   color: #fff;
+  transition: all 400ms ease;
 }
 
 .navbar-toggle:hover{
   color: rgb(185, 181, 181);
+  transition: all 400ms ease;
 }
 
 .navbar-menu {
@@ -22,7 +24,19 @@
   z-index: 999;
   list-style: none;
   padding: 0;
+  transition: all 400ms ease;
 }
+
+.navbar-menu-hide{
+  visibility: hidden;
+  opacity: 0;
+  z-index: 0;
+  margin: 0px;
+  padding: 0px;
+  height: 0px;
+  width: 0px;
+}
+
 
 .navbar-usuario{
   font-weight: bold;
@@ -40,8 +54,11 @@
 .navbar-menuitem a{
   color: #C0bbb7;
   text-decoration: none;
+  transition: all 400ms ease;
+
 }
 
 .navbar-menuitem a:hover{
   color: #fff;
+  transition: all 400ms ease;
 }

@@ -2,12 +2,12 @@
   <div class="container">
     <div class="ui-g">
       <div class="ui-g-12">
-         <a href="#" class="navbar-toggle" (click)="exibindoMenu = !exibindoMenu"><i class="fa fa-bars"></i></a>
+        <a href="#" class="navbar-toggle" (click)="exibindoMenu = !exibindoMenu"><i class="fa fa-bars"></i></a>
       </div>
     </div>
   </div>
 
-  <ul class="navbar-menu" [hidden]="!exibindoMenu">
+  <ul [ngClass]="{'navbar-menu-hide' : !exibindoMenu, 'navbar-menu' : exibindoMenu}">
     <li class="navbar-usuario">Jack Bauer</li>
     <li class="navbar-menuitem"><a href="#">Lançamentos</a></li>
     <li class="navbar-menuitem"><a href="#">Pessoas</a></li>
