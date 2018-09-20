@@ -54,12 +54,4 @@ export class LancamentosPesquisaComponent implements OnInit {
   ngOnInit() {
   }
 
-  getCorValor(evento: any) {
-    if (evento === 'DESPESA') {
-      return 'red';
-    } else {
-      return 'blue';
-    }
-  }
-
 }
