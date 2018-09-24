@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Http, Headers, URLSearchParams } from '@angular/http';
+
+export interface LancamentoFiltro { // Contrato 17.3A
+  descricao: string;
+}
 
 @Injectable()
 export class LancamentoService {
@@ -8,13 +12,19 @@ export class LancamentoService {
 
   constructor(private http: Http) { }
 
-  pesquisar(): Promise<any> {
+  pesquisar(filtro: LancamentoFiltro): Promise<any> {
+    const parametros = new URLSearchParams(); // Atribui parâmetros de pesquisas
     const headers = new Headers();
 
     // tslint:disable-next-line:max-line-length
-    headers.append('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJsZW9jYWxpYmFuQGZpbmFuY2UuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM3NzM4MTM3LCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiJmMDlhNWIwOS05ZmQ1LTQxM2EtYWQ1MC01OTg2ZWQzMWYzNjIiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.v4vzbaAoQz5LHoz5fHlEs63sTJnMi3HKSYe8-3pKGnU');
+    headers.append('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJsZW9jYWxpYmFuQGZpbmFuY2UuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM3ODE1NDYxLCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiI2ZTMzNGFjZi0yZjM4LTRmMjUtYjg0Yi1lZjU0M2VjYTg0NmEiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.nJvx2aKxj3ySmrfDfgQV7TK74uiKr1xduWWgs-EgUs0');
 
-    return this.http.get(`${this.lancamentosUrl}?resumo`, { headers })
+    if (filtro.descricao) { // Se vier alguma informação no filtro
+      parametros.set('descricao', filtro.descricao); // Adicine a informação do filtro no valor
+    }
+
+    return this.http.get(`${this.lancamentosUrl}?resumo`,
+      { headers, search: parametros })
       .toPromise()
       .then(response => response.json().content);
   }
