@@ -18,9 +18,16 @@ export class LancamentosPesquisaComponent implements OnInit {
   }
 
   pesquisar() {
-    console.log(this.descricao);
     this.lancamentoService.pesquisar({ descricao: this.descricao })
       .then(lancamentos => this.lancamentos = lancamentos);
+  }
+
+  getCorValor(evento: any) {
+    if (evento === 'DESPESA') {
+      return 'red';
+    } else {
+      return 'blue';
+    }
   }
 
 }
