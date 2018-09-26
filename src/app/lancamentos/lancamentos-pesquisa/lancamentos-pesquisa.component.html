@@ -7,17 +7,17 @@
 
       <div class="ui-g-12 ui-fluid">
         <label for="descricao-id">Descrição</label>
-        <input type="text" id="descricao-id" pInputText name="descricao" [(ngModel)]="descricao">
+        <input type="text" id="descricao-id" pInputText name="descricao" [(ngModel)]="filtro.descricao">
       </div>
 
       <div class="ui-g-12">
         <label style="display: block;">Vencimento</label>
-        <p-calendar dateFormat="dd/mm/yy" name="dataVencimentoInicio" [(ngModel)]="dataVencimentoInicio"
+        <p-calendar dateFormat="dd/mm/yy" name="dataVencimentoInicio" [(ngModel)]="filtro.dataVencimentoInicio"
           [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" showButtonBar="true" [locale]="pt_BR"></p-calendar>
 
         <label>até</label>
-        <p-calendar dateFormat="dd/mm/yy" name="dataVencimentoFim" [(ngModel)]="dataVencimentoFim" [monthNavigator]="true"
-          [yearNavigator]="true" yearRange="2000:2030" showButtonBar="true" [locale]="pt_BR"></p-calendar>
+        <p-calendar dateFormat="dd/mm/yy" name="dataVencimentoFim" [(ngModel)]="filtro.dataVencimentoFim"
+          [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" showButtonBar="true" [locale]="pt_BR"></p-calendar>
       </div>
 
       <div class="ui-g-12">
@@ -28,7 +28,8 @@
   <div class="ui-g">
     <div class="ui-g-12">
 
-      <p-table [value]="lancamentos" [paginator]="true" [rows]="5" [responsive]=true>
+      <p-table [value]="lancamentos" [paginator]="true" [rows]="filtro.itensPorPagina" [lazy]="true" [responsive]=true
+        [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)">
         <ng-template pTemplate="header">
           <tr>
             <th>Tipo</th>
