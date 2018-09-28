@@ -13,8 +13,6 @@ import { TooltipModule } from 'primeng/tooltip';
 import { CompartilhadoModule } from './../compartilhado/compartilhado.module';
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
 import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.component';
-import { PessoasGridComponent } from './pessoas-grid/pessoas-grid.component';
-
 
 @NgModule({
   imports: [
@@ -30,8 +28,7 @@ import { PessoasGridComponent } from './pessoas-grid/pessoas-grid.component';
   ],
   declarations: [
     PessoaCadastroComponent,
-    PessoasPesquisaComponent,
-    PessoasGridComponent
+    PessoasPesquisaComponent
   ],
   exports: [
     PessoaCadastroComponent,
