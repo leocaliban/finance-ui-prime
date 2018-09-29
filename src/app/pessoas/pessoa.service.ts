@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, URLSearchParams } from '@angular/http';
 
-export class PessoaFiltro { // Contrato 17.3A
+export class PessoaFiltro {
   nome: string;
   pagina = 0;
   itensPorPagina = 5;
