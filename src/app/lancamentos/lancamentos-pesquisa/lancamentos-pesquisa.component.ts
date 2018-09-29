@@ -1,6 +1,7 @@
 import { LancamentoService, LancamentoFiltro } from './../lancamento.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { LazyLoadEvent } from 'primeng/api';
+import { LazyLoadEvent, MessageService } from 'primeng/api';
+
 
 @Component({
   selector: 'app-lancamentos-pesquisa',
@@ -16,7 +17,9 @@ export class LancamentosPesquisaComponent implements OnInit {
 
   lancamentos = [];
 
-  constructor(private lancamentoService: LancamentoService) { }
+  constructor(
+    private lancamentoService: LancamentoService,
+    private messageService: MessageService) { }
 
   ngOnInit() {
     this.calendarioPtBr();
@@ -36,6 +39,7 @@ export class LancamentosPesquisaComponent implements OnInit {
       .then(() => {
         this.tabela.first = 0;
         this.pesquisar();
+        this.mensagemSucesso();
       });
   }
 
@@ -64,6 +68,10 @@ export class LancamentosPesquisaComponent implements OnInit {
       today: 'Hoje',
       clear: 'Limpar'
     };
+  }
+
+  mensagemSucesso() {
+    this.messageService.add({ severity: 'success', summary: 'Sucesso!', detail: 'Lançamento excluído.' });
   }
 
 }
