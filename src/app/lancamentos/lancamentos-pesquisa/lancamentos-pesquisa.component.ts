@@ -1,6 +1,6 @@
 import { LancamentoService, LancamentoFiltro } from './../lancamento.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { LazyLoadEvent, MessageService } from 'primeng/api';
+import { LazyLoadEvent, MessageService, ConfirmationService } from 'primeng/api';
 
 
 @Component({
@@ -19,7 +19,8 @@ export class LancamentosPesquisaComponent implements OnInit {
 
   constructor(
     private lancamentoService: LancamentoService,
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService) { }
 
   ngOnInit() {
     this.calendarioPtBr();
@@ -32,6 +33,15 @@ export class LancamentosPesquisaComponent implements OnInit {
         this.totalRegistros = resultado.total;
         this.lancamentos = resultado.lancamentos;
       });
+  }
+
+  confirmarExclusao(lancamento: any) {
+    this.confirmationService.confirm({
+      message: 'Tem certeza que deseja EXCLUIR?',
+      accept: () => {
+        this.excluir(lancamento);
+      }
+    });
   }
 
   excluir(lancamento: any) {
