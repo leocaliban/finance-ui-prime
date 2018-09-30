@@ -1,7 +1,7 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 
 import { ToastModule } from 'primeng/toast';
 
@@ -14,6 +14,10 @@ import { PessoaService } from './pessoas/pessoa.service';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
@@ -29,7 +33,13 @@ import { ConfirmationService } from 'primeng/api';
     ToastModule,
     ConfirmDialogModule
   ],
-  providers: [LancamentoService, PessoaService, MessageService, ConfirmationService],
+  providers: [
+    LancamentoService,
+    PessoaService,
+    MessageService,
+    ConfirmationService,
+    { provide: LOCALE_ID, useValue: 'pt' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
