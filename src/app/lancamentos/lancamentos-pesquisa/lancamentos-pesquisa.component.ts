@@ -1,6 +1,7 @@
 import { LancamentoService, LancamentoFiltro } from './../lancamento.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { LazyLoadEvent, MessageService, ConfirmationService } from 'primeng/api';
+import { ErrorHandlerService } from '../../core/error-handler.service';
 
 
 @Component({
@@ -20,7 +21,8 @@ export class LancamentosPesquisaComponent implements OnInit {
   constructor(
     private lancamentoService: LancamentoService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService) { }
+    private confirmationService: ConfirmationService,
+    private errorHandler: ErrorHandlerService) { }
 
   ngOnInit() {
     this.calendarioPtBr();
@@ -32,7 +34,8 @@ export class LancamentosPesquisaComponent implements OnInit {
       .then(resultado => {
         this.totalRegistros = resultado.total;
         this.lancamentos = resultado.lancamentos;
-      });
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   confirmarExclusao(lancamento: any) {
@@ -50,7 +53,8 @@ export class LancamentosPesquisaComponent implements OnInit {
         this.tabela.first = 0;
         this.pesquisar();
         this.mensagemSucesso();
-      });
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   getCorValor(evento: any) {
