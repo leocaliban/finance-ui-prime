@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PessoaService, PessoaFiltro } from '../pessoa.service';
-import { LazyLoadEvent } from 'primeng/api';
+import { LazyLoadEvent, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-pessoas-pesquisa',
@@ -15,7 +15,9 @@ export class PessoasPesquisaComponent implements OnInit {
 
   pessoas = [];
 
-  constructor(private pessoaService: PessoaService) { }
+  constructor(
+    private pessoaService: PessoaService,
+    private messageService: MessageService) { }
 
   ngOnInit() {
     this.pesquisar();
@@ -35,12 +37,18 @@ export class PessoasPesquisaComponent implements OnInit {
       .then(() => {
         this.tabela.first = 0;
         this.pesquisar();
+        this.mensagemSucesso();
+
       });
   }
 
   aoMudarPaginaNaTabela(event: LazyLoadEvent) {
     const pagina = event.first / event.rows;
     this.pesquisar(pagina);
+  }
+
+  mensagemSucesso() {
+    this.messageService.add({ severity: 'success', summary: 'Sucesso!', detail: 'Lançamento excluído.' });
   }
 
 }
