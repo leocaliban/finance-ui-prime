@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PessoaService, PessoaFiltro } from '../pessoa.service';
-import { LazyLoadEvent, MessageService } from 'primeng/api';
+import { LazyLoadEvent, MessageService, ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-pessoas-pesquisa',
@@ -17,7 +17,8 @@ export class PessoasPesquisaComponent implements OnInit {
 
   constructor(
     private pessoaService: PessoaService,
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService) { }
 
   ngOnInit() {
     this.pesquisar();
@@ -42,13 +43,22 @@ export class PessoasPesquisaComponent implements OnInit {
       });
   }
 
+  confirmarExclusao(pessoa: any) {
+    this.confirmationService.confirm({
+      message: 'Tem certeza que deseja EXCLUIR?',
+      accept: () => {
+        this.excluir(pessoa);
+      }
+    });
+  }
+
   aoMudarPaginaNaTabela(event: LazyLoadEvent) {
     const pagina = event.first / event.rows;
     this.pesquisar(pagina);
   }
 
   mensagemSucesso() {
-    this.messageService.add({ severity: 'success', summary: 'Sucesso!', detail: 'Lançamento excluído.' });
+    this.messageService.add({ severity: 'success', summary: 'Sucesso!', detail: 'Pessoa excluída.' });
   }
 
 }
