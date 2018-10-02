@@ -15,6 +15,7 @@ export class ErrorHandlerService {
     } else {
       mensagem = 'Desculpe, ocorreu um erro ao processar o serviço remoto.';
       codigo = errorResponse.status;
+      console.error('Ocorreu um erro', errorResponse);
     }
 
     this.messageService.add({ severity: 'error', summary: 'Erro!', detail: `${mensagem} [${codigo}]` });

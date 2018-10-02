@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PessoaService, PessoaFiltro } from '../pessoa.service';
 import { LazyLoadEvent, MessageService, ConfirmationService } from 'primeng/api';
+import { ErrorHandlerService } from '../../core/error-handler.service';
 
 @Component({
   selector: 'app-pessoas-pesquisa',
@@ -18,7 +19,8 @@ export class PessoasPesquisaComponent implements OnInit {
   constructor(
     private pessoaService: PessoaService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService) { }
+    private confirmationService: ConfirmationService,
+    private errorHandler: ErrorHandlerService) { }
 
   ngOnInit() {
     this.pesquisar();
@@ -30,7 +32,8 @@ export class PessoasPesquisaComponent implements OnInit {
       .then(response => {
         this.totalRegistros = response.total;
         this.pessoas = response.pessoas;
-      });
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   excluir(pessoa: any) {
@@ -39,8 +42,8 @@ export class PessoasPesquisaComponent implements OnInit {
         this.tabela.first = 0;
         this.pesquisar();
         this.mensagemSucesso();
-
-      });
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   confirmarExclusao(pessoa: any) {
