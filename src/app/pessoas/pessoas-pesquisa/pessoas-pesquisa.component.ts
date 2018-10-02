@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { PessoaService, PessoaFiltro } from '../pessoa.service';
 import { LazyLoadEvent } from 'primeng/api';
 
@@ -9,6 +9,7 @@ import { LazyLoadEvent } from 'primeng/api';
 })
 export class PessoasPesquisaComponent implements OnInit {
 
+  @ViewChild('tabela') tabela;
   filtro = new PessoaFiltro();
   totalRegistros = 0;
 
@@ -26,6 +27,14 @@ export class PessoasPesquisaComponent implements OnInit {
       .then(response => {
         this.totalRegistros = response.total;
         this.pessoas = response.pessoas;
+      });
+  }
+
+  excluir(pessoa: any) {
+    this.pessoaService.excluir(pessoa.codigo)
+      .then(() => {
+        this.tabela.first = 0;
+        this.pesquisar();
       });
   }
 
