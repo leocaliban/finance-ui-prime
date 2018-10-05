@@ -1,3 +1,4 @@
+import { PessoaService } from './../../pessoas/pessoa.service';
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { CategoriaService } from '../../categorias/categoria.service';
@@ -17,20 +18,17 @@ export class LancamentoCadastroComponent implements OnInit {
   ];
 
   categorias = [];
-
-  pessoas = [
-    { label: 'Aline Silva', value: '1' },
-    { label: 'Nina Myers', value: '2' },
-    { label: 'Kim Bauer', value: '3' }
-  ];
+  pessoas = [];
 
   constructor(
     private categoriaService: CategoriaService,
+    private pessoaService: PessoaService,
     private errorHandler: ErrorHandlerService
   ) { }
 
   ngOnInit() {
     this.carregarCategorias();
+    this.carregarPessoas();
   }
 
   carregarCategorias() {
@@ -41,6 +39,16 @@ export class LancamentoCadastroComponent implements OnInit {
         });
       })
       // this.categorias = response.map(c => ({label:c.nome, value: c.codigo}))
+      .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  carregarPessoas() {
+    return this.pessoaService.pesquisarTodos()
+      .then(response => {
+        this.pessoas = response.map(elemento => {
+          return { label: elemento.nome, value: elemento.codigo };
+        });
+      })
       .catch(erro => this.errorHandler.handle(erro));
   }
 }
