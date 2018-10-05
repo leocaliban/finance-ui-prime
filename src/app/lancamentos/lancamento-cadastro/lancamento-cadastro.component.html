@@ -1,32 +1,33 @@
 <div class="container">
-  <form #lancamentoForm="ngForm">
+  <form #lancamentoForm="ngForm" (ngSubmit)="salvar(lancamentoForm)" >
     <div class="ui-g">
       <div class="ui-g-12">
         <h1>Novo Lançamento</h1>
       </div>
 
       <div class="ui-g-12">
-        <p-selectButton [options]="tipos" #tipo name="tipoLancamento" ngModel #tipoLancamento="ngModel" required></p-selectButton>
+        <p-selectButton [options]="tipos" #tipo name="tipoLancamento" ngModel #tipoLancamento="ngModel" required
+          [(ngModel)]="lancamento.tipo"></p-selectButton>
 
         <app-mensagem [control]="tipoLancamento" erro="required" texto="Selecione um tipo."></app-mensagem>
       </div>
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
-        <label for="vencimento-id">Vencimento</label>
-        <p-calendar dateFormat="dd/mm/yy" name="dataVencimento" ngModel #dataVencimento="ngModel" required></p-calendar>
+        <label>Vencimento</label>
+        <p-calendar dateFormat="dd/mm/yy" name="dataVencimento" ngModel #dataVencimento="ngModel" required [(ngModel)]="lancamento.dataVencimento"></p-calendar>
 
         <app-mensagem [control]="dataVencimento" erro="required" texto="Informe uma data de vencimento."></app-mensagem>
       </div>
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
-        <label for="recebimento-id">{{ tipo.value === 'RECEITA' ? 'Recebimento' : 'Pagamento' }}</label>
-        <p-calendar dateFormat="dd/mm/yy"></p-calendar>
+        <label>{{ tipo.value === 'RECEITA' ? 'Recebimento' : 'Pagamento' }}</label>
+        <p-calendar dateFormat="dd/mm/yy" [(ngModel)]="lancamento.dataPagamento" name="dataPagamento"></p-calendar>
       </div>
 
       <div class="ui-g-12 ui-md-9 ui-fluid">
         <label for="descricao-id">Descrição</label>
         <input type="text" id="descricao-id" pInputText name="descricao" ngModel #descricao="ngModel" required
-          minlength="5">
+          minlength="5" [(ngModel)]="lancamento.descricao">
 
         <app-mensagem [control]="descricao" erro="required" texto="Informe uma descrição."></app-mensagem>
         <app-mensagem [control]="descricao" erro="minlength" texto="Mínimo {{ descricao?.errors?.minlength?.requiredLength }} caracteres."></app-mensagem>
@@ -35,7 +36,7 @@
       <div class="ui-g-12 ui-md-3 ui-fluid">
         <label for="valor-id">Valor</label>
         <input type="text" id="valor-id" placeholder="0,00" pInputText currencyMask [options]="{ prefix: 'R$',  thousands: '.', decimal: ',', allowNegative: false }"
-          name="valor" ngModel #valor="ngModel" required>
+          name="valor" ngModel #valor="ngModel" required [(ngModel)]="lancamento.valor">
 
         <app-mensagem [control]="valor" erro="required" texto="Informe o valor."></app-mensagem>
       </div>
@@ -44,7 +45,7 @@
         <label for="categoria-id">Categoria</label>
 
         <p-dropdown id="categoria-id" [options]="categorias" [autoWidth]="false" placeholder="Selecione" name="categoria"
-          ngModel #categoria="ngModel" required>
+          ngModel #categoria="ngModel" required [(ngModel)]="lancamento.categoria.codigo">
         </p-dropdown>
 
         <app-mensagem [control]="categoria" erro="required" texto="Selecione uma categoria."></app-mensagem>
@@ -53,14 +54,14 @@
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label for="pessoa-id">Pessoa</label>
         <p-dropdown id="pessoa-id" [options]="pessoas" [autoWidth]="false" placeholder="Selecione" [filter]="true" name="pessoa"
-          ngModel #pessoa="ngModel" required></p-dropdown>
+          ngModel #pessoa="ngModel" required [(ngModel)]="lancamento.pessoa.codigo"></p-dropdown>
 
         <app-mensagem [control]="pessoa" erro="required" texto="Selecione uma pessoa."></app-mensagem>
       </div>
 
       <div class="ui-g-12 ui-fluid">
         <label for="observacao-id">Observação</label>
-        <textarea id="observacao-id" rows="3" cols="30" pInputTextarea></textarea>
+        <textarea id="observacao-id" rows="3" cols="30" pInputTextarea name="observacao" [(ngModel)]="lancamento.observacao"></textarea>
       </div>
 
       <div class="ui-g-12">
@@ -68,7 +69,7 @@
           [disabled]="!lancamentoForm.valid">
         </button>
 
-        <button pButton type="submit" label="Novo" icon="pi pi-plus" class="ui-button-rounded ui-button-info">
+        <button pButton type="button" label="Novo" icon="pi pi-plus" class="ui-button-rounded ui-button-info">
         </button>
 
         <a href="#">Voltar para a pesquisa</a>

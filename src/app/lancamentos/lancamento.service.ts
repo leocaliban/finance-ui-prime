@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, URLSearchParams } from '@angular/http';
 
 import * as moment from 'moment';
+import { Lancamento } from '../core/domain/lancamento';
 
 export class LancamentoFiltro { // Contrato 17.3A
   descricao: string;
@@ -17,6 +18,17 @@ export class LancamentoService {
   lancamentosUrl = 'http://localhost:8080/lancamentos';
 
   constructor(private http: Http) { }
+
+  salvar(lancamento: Lancamento): Promise<Lancamento> {
+    const headers = new Headers();
+    this.adicionarAuthorization(headers);
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.post(this.lancamentosUrl, JSON.stringify(lancamento), { headers })
+      .toPromise()
+      .then(response => response.json());
+
+  }
 
   pesquisar(filtro: LancamentoFiltro): Promise<any> {
     const parametros = new URLSearchParams();

@@ -1,14 +1,16 @@
+import { Lancamento } from './../../core/domain/lancamento';
 import { PessoaService } from './../../pessoas/pessoa.service';
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/api';
 import { CategoriaService } from '../../categorias/categoria.service';
 import { ErrorHandlerService } from '../../core/error-handler.service';
+import { FormControl } from '@angular/forms';
+import { LancamentoService } from '../lancamento.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-lancamento-cadastro',
   templateUrl: './lancamento-cadastro.component.html',
-  styleUrls: ['./lancamento-cadastro.component.css'],
-  providers: [MessageService]
+  styleUrls: ['./lancamento-cadastro.component.css']
 })
 export class LancamentoCadastroComponent implements OnInit {
 
@@ -19,16 +21,29 @@ export class LancamentoCadastroComponent implements OnInit {
 
   categorias = [];
   pessoas = [];
+  lancamento = new Lancamento();
 
   constructor(
     private categoriaService: CategoriaService,
     private pessoaService: PessoaService,
-    private errorHandler: ErrorHandlerService
+    private errorHandler: ErrorHandlerService,
+    private lancamentoService: LancamentoService,
+    private messageService: MessageService
   ) { }
 
   ngOnInit() {
     this.carregarCategorias();
     this.carregarPessoas();
+  }
+
+  salvar(form: FormControl) {
+    this.lancamentoService.salvar(this.lancamento)
+      .then(() => {
+        this.mensagemSucesso();
+        form.reset();
+        this.lancamento = new Lancamento();
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   carregarCategorias() {
@@ -50,5 +65,9 @@ export class LancamentoCadastroComponent implements OnInit {
         });
       })
       .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  mensagemSucesso() {
+    this.messageService.add({ severity: 'success', summary: 'Sucesso!', detail: 'O Lançamento foi salvo.' });
   }
 }
