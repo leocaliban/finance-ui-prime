@@ -62,3 +62,7 @@
   color: #fff;
   transition: all 400ms ease;
 }
+
+.navbar-menuitem.ativo {
+  background-color: #636160;
+}
