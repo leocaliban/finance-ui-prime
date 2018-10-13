@@ -72,7 +72,8 @@
             </td>
             <td class="col-operacoes">
               <span class="ui-column-title">Operações</span>
-              <button pButton icon="fa fa-pencil" pTooltip="Editar" tooltipPosition="top" class="ui-button-rounded"></button>
+              <button pButton icon="fa fa-pencil" pTooltip="Editar" tooltipPosition="top" class="ui-button-rounded" [routerLink]="['/lancamentos', lancamento.codigo]"></button>
+
               <button pButton icon="fa fa-trash" pTooltip="Excluir" tooltipPosition="top" class="ui-button-rounded"
                 (click)="confirmarExclusao(lancamento)"></button>
             </td>
