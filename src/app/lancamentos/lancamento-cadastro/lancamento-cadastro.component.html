@@ -1,5 +1,5 @@
 <div class="container">
-  <form #lancamentoForm="ngForm" (ngSubmit)="salvar(lancamentoForm)" >
+  <form #lancamentoForm="ngForm" (ngSubmit)="salvar(lancamentoForm)">
     <div class="ui-g">
       <div class="ui-g-12">
         <h1>{{ editando ? 'Edição de' : 'Novo'}} Lançamento</h1>
@@ -69,7 +69,7 @@
           [disabled]="!lancamentoForm.valid">
         </button>
 
-        <button pButton type="button" label="Novo" icon="pi pi-plus" class="ui-button-rounded ui-button-info">
+        <button pButton type="button" label="Novo" icon="pi pi-plus" class="ui-button-rounded ui-button-info" (click)="novoLancamento(lancamentoForm)">
         </button>
 
         <a routerLink="/lancamentos">Voltar para a pesquisa</a>
