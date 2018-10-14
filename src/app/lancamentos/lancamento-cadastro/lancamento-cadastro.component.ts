@@ -34,11 +34,12 @@ export class LancamentoCadastroComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.activatedRoute.snapshot.params['codigo']);
-    console.log(this.lancamentoService.buscarPorCodigo(this.activatedRoute.snapshot.params['codigo']));
-
     this.carregarCategorias();
     this.carregarPessoas();
+    const codigoLancamento = this.activatedRoute.snapshot.params['codigo'];
+    if (codigoLancamento) {
+      this.carregarLancamento(codigoLancamento);
+    }
   }
 
   salvar(form: FormControl) {
@@ -49,6 +50,12 @@ export class LancamentoCadastroComponent implements OnInit {
         this.lancamento = new Lancamento();
       })
       .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  carregarLancamento(codigo: number) {
+    this.lancamentoService.buscarPorCodigo(codigo).then(response => {
+      this.lancamento = response;
+    }).catch(erro => this.errorHandler.handle(erro));
   }
 
   carregarCategorias() {
@@ -74,5 +81,9 @@ export class LancamentoCadastroComponent implements OnInit {
 
   mensagemSucesso() {
     this.messageService.add({ severity: 'success', summary: 'Sucesso!', detail: 'O Lançamento foi salvo.' });
+  }
+
+  get editando() {
+    return Boolean(this.lancamento.codigo);
   }
 }
