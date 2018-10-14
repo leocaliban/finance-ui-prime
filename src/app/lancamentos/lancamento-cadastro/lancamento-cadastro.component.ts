@@ -43,13 +43,29 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   salvar(form: FormControl) {
+    if (this.editando) {
+      this.atualizarLancamento(form);
+    } else {
+      this.adicionarLancamento(form);
+    }
+  }
+
+  adicionarLancamento(form: FormControl) {
     this.lancamentoService.salvar(this.lancamento)
       .then(() => {
-        this.mensagemSucesso();
+        this.mensagemSucesso('O Lançamento foi salvo.');
         form.reset();
         this.lancamento = new Lancamento();
       })
       .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  atualizarLancamento(form: FormControl) {
+    this.lancamentoService.atualizar(this.lancamento)
+      .then(response => {
+        this.mensagemSucesso('O Lançamento foi alterado.');
+        this.lancamento = response;
+      }).catch(erro => this.errorHandler.handle(erro));
   }
 
   carregarLancamento(codigo: number) {
@@ -79,8 +95,8 @@ export class LancamentoCadastroComponent implements OnInit {
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  mensagemSucesso() {
-    this.messageService.add({ severity: 'success', summary: 'Sucesso!', detail: 'O Lançamento foi salvo.' });
+  mensagemSucesso(detalhe: string) {
+    this.messageService.add({ severity: 'success', summary: 'Sucesso!', detail: detalhe });
   }
 
   get editando() {
