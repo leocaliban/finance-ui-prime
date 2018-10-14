@@ -34,7 +34,9 @@ export class LancamentoCadastroComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.activatedRoute.snapshot.params['codigo']); // Captura os parametros da url
+    console.log(this.activatedRoute.snapshot.params['codigo']);
+    console.log(this.lancamentoService.buscarPorCodigo(this.activatedRoute.snapshot.params['codigo']));
+
     this.carregarCategorias();
     this.carregarPessoas();
   }
