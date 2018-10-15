@@ -13,6 +13,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { CompartilhadoModule } from './../compartilhado/compartilhado.module';
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
 import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.co
     InputTextModule,
     SelectButtonModule,
     TableModule,
-    TooltipModule
+    TooltipModule,
+    RouterModule
   ],
   declarations: [
     PessoaCadastroComponent,
