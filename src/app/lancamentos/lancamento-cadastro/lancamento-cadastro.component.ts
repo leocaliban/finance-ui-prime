@@ -7,6 +7,7 @@ import { FormControl } from '@angular/forms';
 import { LancamentoService } from '../lancamento.service';
 import { MessageService } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-lancamento-cadastro',
@@ -31,10 +32,12 @@ export class LancamentoCadastroComponent implements OnInit {
     private lancamentoService: LancamentoService,
     private messageService: MessageService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private title: Title
   ) { }
 
   ngOnInit() {
+    this.title.setTitle('Novo Lançamento');
     this.carregarCategorias();
     this.carregarPessoas();
     const codigoLancamento = this.activatedRoute.snapshot.params['codigo'];
@@ -65,12 +68,14 @@ export class LancamentoCadastroComponent implements OnInit {
       .then(response => {
         this.mensagemSucesso('O Lançamento foi alterado.');
         this.lancamento = response;
+        this.atualizarTitulo();
       }).catch(erro => this.errorHandler.handle(erro));
   }
 
   carregarLancamento(codigo: number) {
     this.lancamentoService.buscarPorCodigo(codigo).then(response => {
       this.lancamento = response;
+      this.atualizarTitulo();
     }).catch(erro => this.errorHandler.handle(erro));
   }
 
@@ -112,5 +117,9 @@ export class LancamentoCadastroComponent implements OnInit {
 
   get editando() {
     return Boolean(this.lancamento.codigo);
+  }
+
+  atualizarTitulo() {
+    this.title.setTitle(`Editando: ${this.lancamento.descricao}`);
   }
 }
