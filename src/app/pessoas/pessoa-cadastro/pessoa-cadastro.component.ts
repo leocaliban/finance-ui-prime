@@ -23,6 +23,7 @@ export class PessoaCadastroComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.activatedRoute.snapshot.params['codigo']);
+    console.log(this.pessoaService.buscarPorCodigo(this.activatedRoute.snapshot.params['codigo']));
   }
 
   salvar(form: FormControl) {
