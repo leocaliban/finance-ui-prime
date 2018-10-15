@@ -4,6 +4,7 @@ import { PessoaService } from '../pessoa.service';
 import { ErrorHandlerService } from '../../core/error-handler.service';
 import { MessageService } from 'primeng/api';
 import { FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-pessoa-cadastro',
@@ -16,10 +17,12 @@ export class PessoaCadastroComponent implements OnInit {
   constructor(
     private pessoaService: PessoaService,
     private errorHandler: ErrorHandlerService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    console.log(this.activatedRoute.snapshot.params['codigo']);
   }
 
   salvar(form: FormControl) {
