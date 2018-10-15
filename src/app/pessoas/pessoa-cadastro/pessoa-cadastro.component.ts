@@ -4,7 +4,7 @@ import { PessoaService } from '../pessoa.service';
 import { ErrorHandlerService } from '../../core/error-handler.service';
 import { MessageService } from 'primeng/api';
 import { FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-pessoa-cadastro',
@@ -18,7 +18,8 @@ export class PessoaCadastroComponent implements OnInit {
     private pessoaService: PessoaService,
     private errorHandler: ErrorHandlerService,
     private messageService: MessageService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -32,18 +33,16 @@ export class PessoaCadastroComponent implements OnInit {
     if (this.editando) {
       this.atualizarPessoa(form);
     } else {
-      this.adicionarPessoa(form);
+      this.adicionarPessoa();
     }
   }
 
-  adicionarPessoa(form: FormControl) {
+  adicionarPessoa() {
     this.pessoaService.salvar(this.pessoa)
-      .then(() => {
+      .then(response => {
         this.mensagemSucesso('A pessoa foi salva.');
-        form.reset();
-        this.pessoa = new Pessoa();
-      })
-      .catch(erro => this.errorHandler.handle(erro));
+        this.router.navigate(['/pessoas', response.codigo]);
+      }).catch(erro => this.errorHandler.handle(erro));
   }
 
   atualizarPessoa(form: FormControl) {
@@ -58,6 +57,14 @@ export class PessoaCadastroComponent implements OnInit {
     this.pessoaService.buscarPorCodigo(codigo).then(response => {
       this.pessoa = response;
     }).catch(erro => this.errorHandler.handle(erro));
+  }
+
+  novaPessoa(form: FormControl) {
+    form.reset();
+    setTimeout(function () {
+      this.pessoa = new Pessoa();
+    }.bind(this), 1);
+    this.router.navigate(['/pessoas/novo']);
   }
 
   mensagemSucesso(detalhe: string) {

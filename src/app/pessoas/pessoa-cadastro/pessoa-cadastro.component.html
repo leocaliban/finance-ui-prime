@@ -66,7 +66,7 @@
           [disabled]="!pessoaForm.valid">
         </button>
 
-        <button pButton type="button" label="Novo" icon="pi pi-plus" class="ui-button-rounded ui-button-info">
+        <button pButton type="button" label="Novo" icon="pi pi-plus" class="ui-button-rounded ui-button-info" (click)="novaPessoa(pessoaForm)">
         </button>
 
         <a routerLink="/pessoas">Voltar para a pesquisa</a>
