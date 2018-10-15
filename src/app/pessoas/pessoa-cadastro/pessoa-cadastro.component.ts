@@ -29,13 +29,29 @@ export class PessoaCadastroComponent implements OnInit {
   }
 
   salvar(form: FormControl) {
+    if (this.editando) {
+      this.atualizarPessoa(form);
+    } else {
+      this.adicionarPessoa(form);
+    }
+  }
+
+  adicionarPessoa(form: FormControl) {
     this.pessoaService.salvar(this.pessoa)
       .then(() => {
-        this.mensagemSucesso();
+        this.mensagemSucesso('A pessoa foi salva.');
         form.reset();
         this.pessoa = new Pessoa();
       })
       .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  atualizarPessoa(form: FormControl) {
+    this.pessoaService.atualizar(this.pessoa)
+      .then(response => {
+        this.mensagemSucesso('A Pessoa foi alterada.');
+        this.pessoa = response;
+      }).catch(erro => this.errorHandler.handle(erro));
   }
 
   carregarPessoa(codigo: number) {
@@ -44,8 +60,8 @@ export class PessoaCadastroComponent implements OnInit {
     }).catch(erro => this.errorHandler.handle(erro));
   }
 
-  mensagemSucesso() {
-    this.messageService.add({ severity: 'success', summary: 'Sucesso!', detail: 'A pessoa foi salva.' });
+  mensagemSucesso(detalhe: string) {
+    this.messageService.add({ severity: 'success', summary: 'Sucesso!', detail: detalhe });
   }
 
   get editando() {
