@@ -5,6 +5,7 @@ import { ErrorHandlerService } from '../../core/error-handler.service';
 import { MessageService } from 'primeng/api';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-pessoa-cadastro',
@@ -19,10 +20,12 @@ export class PessoaCadastroComponent implements OnInit {
     private errorHandler: ErrorHandlerService,
     private messageService: MessageService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private title: Title
   ) { }
 
   ngOnInit() {
+    this.title.setTitle('Nova Pessoa');
     const codigoPessoa = this.activatedRoute.snapshot.params['codigo'];
     if (codigoPessoa) {
       this.carregarPessoa(codigoPessoa);
@@ -50,12 +53,14 @@ export class PessoaCadastroComponent implements OnInit {
       .then(response => {
         this.mensagemSucesso('A Pessoa foi alterada.');
         this.pessoa = response;
+        this.atualizarTitulo();
       }).catch(erro => this.errorHandler.handle(erro));
   }
 
   carregarPessoa(codigo: number) {
     this.pessoaService.buscarPorCodigo(codigo).then(response => {
       this.pessoa = response;
+      this.atualizarTitulo();
     }).catch(erro => this.errorHandler.handle(erro));
   }
 
@@ -73,6 +78,10 @@ export class PessoaCadastroComponent implements OnInit {
 
   get editando() {
     return Boolean(this.pessoa.codigo);
+  }
+
+  atualizarTitulo() {
+    this.title.setTitle(`Editando: ${this.pessoa.nome}`);
   }
 
 }
