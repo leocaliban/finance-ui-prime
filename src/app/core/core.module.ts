@@ -16,6 +16,7 @@ import { PessoaService } from '../pessoas/pessoa.service';
 import { RouterModule } from '@angular/router';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { Title } from '@angular/platform-browser';
+import { AuthService } from '../seguranca/auth.service';
 
 @NgModule({
   imports: [
@@ -36,6 +37,7 @@ import { Title } from '@angular/platform-browser';
     PessoaService,
     MessageService,
     CategoriaService,
+    AuthService,
     ConfirmationService,
     Title,
     { provide: LOCALE_ID, useValue: 'pt' }
