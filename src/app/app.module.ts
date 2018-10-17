@@ -8,6 +8,7 @@ import { LancamentosModule } from './lancamentos/lancamentos.module';
 import { PessoasModule } from './pessoas/pessoas.module';
 import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app-routing.module';
+import { SegurancaModule } from './seguranca/seguranca.module';
 
 @NgModule({
   declarations: [
@@ -16,10 +17,13 @@ import { AppRoutingModule } from './app-routing.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpModule,
     CoreModule,
     LancamentosModule,
     PessoasModule,
-    HttpModule,
+    SegurancaModule,
+
+    // deve ficar por último para evitar falha no roteamento
     AppRoutingModule
   ],
   providers: [],
