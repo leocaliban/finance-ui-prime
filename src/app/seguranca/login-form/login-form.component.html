@@ -1,5 +1,5 @@
 <div class="form">
-  <form autocomplete="off" #form="ngForm">
+  <form #form="ngForm">
     <div class="ui-g-12">
       <h1>Login</h1>
     </div>
@@ -9,7 +9,7 @@
     </div>
 
     <div class="ui-g-12 ui-fluid">
-      <input pInputText type="password" name="senha" placeholder="Senha" ngModel required #senha>
+      <input pInputText type="password" name="senha" placeholder="Senha" autocomplete="password" ngModel required #senha>
     </div>
 
     <div class="ui-g-12">
