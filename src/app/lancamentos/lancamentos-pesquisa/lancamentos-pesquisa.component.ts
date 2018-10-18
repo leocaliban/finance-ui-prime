@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { LazyLoadEvent, MessageService, ConfirmationService } from 'primeng/api';
 import { ErrorHandlerService } from '../../core/error-handler.service';
 import { Title } from '@angular/platform-browser';
+import { AuthService } from '../../seguranca/auth.service';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class LancamentosPesquisaComponent implements OnInit {
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private errorHandler: ErrorHandlerService,
-    private title: Title) { }
+    private title: Title,
+    public authService: AuthService) { }
 
   ngOnInit() {
     this.calendarioPtBr();
