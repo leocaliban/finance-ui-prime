@@ -18,6 +18,7 @@ import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao
 import { Title } from '@angular/platform-browser';
 import { AuthService } from '../seguranca/auth.service';
 import { JwtHelper } from 'angular2-jwt';
+import { NaoAutorizadoComponent } from './nao-autorizado/nao-autorizado.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,11 @@ import { JwtHelper } from 'angular2-jwt';
     ConfirmDialogModule,
     RouterModule
   ],
-  declarations: [NavbarComponent, PaginaNaoEncontradaComponent],
+  declarations: [
+    NavbarComponent,
+    PaginaNaoEncontradaComponent,
+    NaoAutorizadoComponent
+  ],
   exports: [
     NavbarComponent,
     ToastModule,
