@@ -39,6 +39,11 @@ export class AuthService {
       });
   }
 
+  isAccessTokenInvalido() {
+    const token = localStorage.getItem('token');
+    return !token || this.jwtHelper.isTokenExpired(token);
+  }
+
   obterNovoAccessToken(): Promise<void> {
     const headers = new Headers();
     headers.append('Authorization', 'Basic YW5ndWxhcjphbmd1bGFy'); // AuthorizationServerConfig API

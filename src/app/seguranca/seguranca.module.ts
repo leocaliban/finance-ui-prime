@@ -7,8 +7,10 @@ import { ButtonModule } from 'primeng/button';
 import { SegurancaRoutingModule } from './seguranca-routing.module';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { Http, RequestOptions } from '@angular/http';
+import { FinanceHttp } from './finance-http';
+import { AuthService } from './auth.service';
 
-export function authHttpServiceFactory(http: Http, options: RequestOptions) {
+export function authHttpServiceFactory(authService: AuthService, http: Http, options: RequestOptions) {
   const config = new AuthConfig(
     {
       globalHeaders: [
@@ -16,7 +18,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
       ]
     }
   );
-  return new AuthHttp(config, http, options);
+  return new FinanceHttp(authService, config, http, options);
 }
 
 @NgModule({
@@ -32,7 +34,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     {
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,
-      deps: [Http, RequestOptions]
+      deps: [AuthService, Http, RequestOptions]
     }
   ]
 })
