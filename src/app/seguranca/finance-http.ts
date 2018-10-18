@@ -4,6 +4,8 @@ import { Http, RequestOptions, RequestOptionsArgs, Response } from '@angular/htt
 import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 
+export class NotAuthenticatedError { }
+
 @Injectable()
 export class FinanceHttp extends AuthHttp {
 
@@ -49,6 +51,9 @@ export class FinanceHttp extends AuthHttp {
 
       const chamadaNovoAccessToken = this.auth.obterNovoAccessToken()
         .then(() => {
+          if (this.auth.isAccessTokenInvalido()) {
+            throw new NotAuthenticatedError();
+          }
           return fn().toPromise();
         });
 
