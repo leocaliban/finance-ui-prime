@@ -10,6 +10,7 @@ import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { Http, RequestOptions } from '@angular/http';
 import { FinanceHttp } from './finance-http';
 import { AuthService } from './auth.service';
+import { LogoutService } from './logout.service';
 
 export function authHttpServiceFactory(authService: AuthService, http: Http, options: RequestOptions) {
   const config = new AuthConfig(
@@ -37,7 +38,8 @@ export function authHttpServiceFactory(authService: AuthService, http: Http, opt
       useFactory: authHttpServiceFactory,
       deps: [AuthService, Http, RequestOptions]
     },
-    AuthGuard
+    AuthGuard,
+    LogoutService
   ]
 })
 export class SegurancaModule { }
