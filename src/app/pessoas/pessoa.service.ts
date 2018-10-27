@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { URLSearchParams } from '@angular/http';
 import { Pessoa } from '../core/domain/pessoa';
 import { AuthHttp } from 'angular2-jwt';
+import { environment } from '../../environments/environment';
 
 export class PessoaFiltro {
   nome: string;
@@ -12,9 +13,11 @@ export class PessoaFiltro {
 @Injectable()
 export class PessoaService {
 
-  pessoasUrl = 'http://localhost:8080/pessoas';
+  pessoasUrl: string;
 
-  constructor(private http: AuthHttp) { }
+  constructor(private http: AuthHttp) {
+    this.pessoasUrl = `${environment.apiURL}/pessoas`;
+   }
 
   salvar(pessoa: Pessoa): Promise<Pessoa> {
     return this.http.post(this.pessoasUrl, JSON.stringify(pessoa))

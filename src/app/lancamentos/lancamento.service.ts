@@ -4,6 +4,7 @@ import { URLSearchParams } from '@angular/http';
 
 import * as moment from 'moment';
 import { Lancamento } from '../core/domain/lancamento';
+import { environment } from '../../environments/environment';
 
 export class LancamentoFiltro { // Contrato 17.3A
   descricao: string;
@@ -16,9 +17,11 @@ export class LancamentoFiltro { // Contrato 17.3A
 @Injectable()
 export class LancamentoService {
 
-  lancamentosUrl = 'http://localhost:8080/lancamentos';
+  lancamentosUrl: string;
 
-  constructor(private http: AuthHttp) { }
+  constructor(private http: AuthHttp) {
+    this.lancamentosUrl = `${environment.apiURL}/lancamentos`;
+  }
 
   salvar(lancamento: Lancamento): Promise<Lancamento> {
     return this.http.post(this.lancamentosUrl, JSON.stringify(lancamento))
