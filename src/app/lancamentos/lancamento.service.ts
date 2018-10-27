@@ -4,7 +4,7 @@ import { URLSearchParams } from '@angular/http';
 
 import * as moment from 'moment';
 import { Lancamento } from '../core/domain/lancamento';
-import { environment } from '../../environments/environment';
+import { environment } from './../../environments/environment';
 
 export class LancamentoFiltro { // Contrato 17.3A
   descricao: string;
