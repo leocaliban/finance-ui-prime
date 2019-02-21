@@ -3,7 +3,7 @@ import { PessoaService } from './../../pessoas/pessoa.service';
 import { Component, OnInit } from '@angular/core';
 import { CategoriaService } from '../../categorias/categoria.service';
 import { ErrorHandlerService } from '../../core/error-handler.service';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LancamentoService } from '../lancamento.service';
 import { MessageService } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -24,6 +24,7 @@ export class LancamentoCadastroComponent implements OnInit {
   categorias = [];
   pessoas = [];
   lancamento = new Lancamento();
+  formulario: FormGroup;
 
   constructor(
     private categoriaService: CategoriaService,
@@ -33,10 +34,12 @@ export class LancamentoCadastroComponent implements OnInit {
     private messageService: MessageService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private title: Title
+    private title: Title,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
+    this.carregarFormulario();
     this.title.setTitle('Novo Lançamento');
     this.carregarCategorias();
     this.carregarPessoas();
@@ -44,6 +47,26 @@ export class LancamentoCadastroComponent implements OnInit {
     if (codigoLancamento) {
       this.carregarLancamento(codigoLancamento);
     }
+  }
+
+  carregarFormulario() {
+    this.formulario = this.formBuilder.group({
+      codigo: [],
+      descricao: [null, [Validators.required, Validators.minLength(5)]],
+      dataVencimento: [null, Validators.required],
+      dataPagamento: [],
+      valor: [null, Validators.required],
+      observacao: [],
+      tipo: ['RECEITA', Validators.required],
+      pessoa: this.formBuilder.group({
+        codigo: [null, Validators.required],
+        nome: []
+      }),
+      categoria: this.formBuilder.group({
+        codigo: [null, Validators.required],
+        nome: []
+      })
+    });
   }
 
   salvar(form: FormControl) {
