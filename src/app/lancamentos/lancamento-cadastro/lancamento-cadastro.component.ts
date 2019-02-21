@@ -3,7 +3,7 @@ import { PessoaService } from './../../pessoas/pessoa.service';
 import { Component, OnInit } from '@angular/core';
 import { CategoriaService } from '../../categorias/categoria.service';
 import { ErrorHandlerService } from '../../core/error-handler.service';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LancamentoService } from '../lancamento.service';
 import { MessageService } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -23,7 +23,6 @@ export class LancamentoCadastroComponent implements OnInit {
 
   categorias = [];
   pessoas = [];
-  lancamento = new Lancamento();
   formulario: FormGroup;
 
   constructor(
@@ -69,16 +68,16 @@ export class LancamentoCadastroComponent implements OnInit {
     });
   }
 
-  salvar(form: FormControl) {
+  salvar() {
     if (this.editando) {
-      this.atualizarLancamento(form);
+      this.atualizarLancamento();
     } else {
       this.adicionarLancamento();
     }
   }
 
   adicionarLancamento() {
-    this.lancamentoService.salvar(this.lancamento)
+    this.lancamentoService.salvar(this.formulario.value)
       .then(response => {
         this.mensagemSucesso('O Lançamento foi salvo.');
         this.router.navigate(['/lancamentos', response.codigo]);
@@ -86,20 +85,21 @@ export class LancamentoCadastroComponent implements OnInit {
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  atualizarLancamento(form: FormControl) {
-    this.lancamentoService.atualizar(this.lancamento)
+  atualizarLancamento() {
+    this.lancamentoService.atualizar(this.formulario.value)
       .then(response => {
         this.mensagemSucesso('O Lançamento foi alterado.');
-        this.lancamento = response;
+        this.formulario.setValue(response);
         this.atualizarTitulo();
       }).catch(erro => this.errorHandler.handle(erro));
   }
 
   carregarLancamento(codigo: number) {
     this.lancamentoService.buscarPorCodigo(codigo).then(response => {
-      this.lancamento = response;
+      this.formulario.setValue(response);
       this.atualizarTitulo();
-    }).catch(erro => this.errorHandler.handle(erro));
+    })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   carregarCategorias() {
@@ -123,8 +123,8 @@ export class LancamentoCadastroComponent implements OnInit {
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  novoLancamento(form: FormControl) {
-    form.reset();
+  novoLancamento() {
+    this.formulario.reset();
 
     setTimeout(function () {
       this.lancamento = new Lancamento();
@@ -139,10 +139,10 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   get editando() {
-    return Boolean(this.lancamento.codigo);
+    return Boolean(this.formulario.get('codigo').value);
   }
 
   atualizarTitulo() {
-    this.title.setTitle(`Editando: ${this.lancamento.descricao}`);
+    this.title.setTitle(`Editando: ${this.formulario.get('descricao').value}`);
   }
 }
