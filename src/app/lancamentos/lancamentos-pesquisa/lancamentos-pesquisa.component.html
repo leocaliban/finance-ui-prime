@@ -13,11 +13,13 @@
       <div class="ui-g-12">
         <label style="display: block;">Vencimento</label>
         <p-calendar dateFormat="dd/mm/yy" name="dataVencimentoInicio" [(ngModel)]="filtro.dataVencimentoInicio"
-          [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" showButtonBar="true" [locale]="pt_BR"></p-calendar>
+          [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" showButtonBar="true" [locale]="pt_BR">
+        </p-calendar>
 
         <label>até</label>
         <p-calendar dateFormat="dd/mm/yy" name="dataVencimentoFim" [(ngModel)]="filtro.dataVencimentoFim"
-          [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" showButtonBar="true" [locale]="pt_BR"></p-calendar>
+          [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" showButtonBar="true" [locale]="pt_BR">
+        </p-calendar>
       </div>
 
       <div class="ui-g-12">
@@ -72,10 +74,22 @@
             </td>
             <td class="col-operacoes">
               <span class="ui-column-title">Operações</span>
-              <button pButton icon="fa fa-pencil" pTooltip="Editar" tooltipPosition="top" class="ui-button-rounded" [routerLink]="['/lancamentos', lancamento.codigo]"></button>
+              <button pButton icon="fa fa-pencil" pTooltip="Editar" tooltipPosition="top" class="ui-button-rounded"
+                [routerLink]="['/lancamentos', lancamento.codigo]"></button>
 
               <button pButton icon="fa fa-trash" pTooltip="Excluir" tooltipPosition="top" class="ui-button-rounded"
-                (click)="confirmarExclusao(lancamento)" [disabled]="!authService.temPermissao('ROLE_REMOVER_LANCAMENTO')"></button>
+                (click)="confirmarExclusao(lancamento)"
+                [disabled]="!authService.temPermissao('ROLE_REMOVER_LANCAMENTO')"></button>
+            </td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="7">
+              Nenhum Lançamento encontrado!
+              <br />
+              Clique <a routerLink="/lancamentos/novo">AQUI</a> para cadastrar.
             </td>
           </tr>
         </ng-template>
@@ -83,7 +97,8 @@
 
     </div>
     <div class="ui-g-12">
-      <button pButton label="Novo Lançamento" class="ui-button-rounded ui-button-secondary" routerLink="/lancamentos/novo"></button>
+      <button pButton label="Novo Lançamento" class="ui-button-rounded ui-button-secondary"
+        routerLink="/lancamentos/novo"></button>
     </div>
   </div>
 </div>
