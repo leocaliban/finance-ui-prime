@@ -89,14 +89,14 @@ export class LancamentoCadastroComponent implements OnInit {
     this.lancamentoService.atualizar(this.formulario.value)
       .then(response => {
         this.mensagemSucesso('O Lançamento foi alterado.');
-        this.formulario.setValue(response);
+        this.formulario.patchValue(response);
         this.atualizarTitulo();
       }).catch(erro => this.errorHandler.handle(erro));
   }
 
   carregarLancamento(codigo: number) {
     this.lancamentoService.buscarPorCodigo(codigo).then(response => {
-      this.formulario.setValue(response);
+      this.formulario.patchValue(response);
       this.atualizarTitulo();
     })
       .catch(erro => this.errorHandler.handle(erro));
