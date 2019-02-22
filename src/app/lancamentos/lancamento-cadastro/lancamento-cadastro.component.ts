@@ -3,7 +3,7 @@ import { PessoaService } from './../../pessoas/pessoa.service';
 import { Component, OnInit } from '@angular/core';
 import { CategoriaService } from '../../categorias/categoria.service';
 import { ErrorHandlerService } from '../../core/error-handler.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { LancamentoService } from '../lancamento.service';
 import { MessageService } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -51,7 +51,7 @@ export class LancamentoCadastroComponent implements OnInit {
   carregarFormulario() {
     this.formulario = this.formBuilder.group({
       codigo: [],
-      descricao: [null, [Validators.required, Validators.minLength(5)]],
+      descricao: [null, [this.validarCampoObrigatorio, this.validarTamanhoMinimo(5)]],
       dataVencimento: [null, Validators.required],
       dataPagamento: [],
       valor: [null, Validators.required],
@@ -66,6 +66,18 @@ export class LancamentoCadastroComponent implements OnInit {
         nome: []
       })
     });
+  }
+
+  validarCampoObrigatorio(input: FormControl) {
+    // Para acessar um outro input do form
+    // input.root.get('dataVencimento').value
+    return (input.value ? null : { campoObrigatorio: true });
+  }
+
+  validarTamanhoMinimo(quantidadeDeCaracteres: number) {
+    return (input: FormControl) => {
+      return (!input.value || input.value.length >= quantidadeDeCaracteres) ? null : { tamanhoMinimo: { tamanho: quantidadeDeCaracteres } };
+    };
   }
 
   salvar() {

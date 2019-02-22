@@ -28,10 +28,10 @@
         <label for="descricao-id">Descrição</label>
         <input type="text" id="descricao-id" pInputText name="descricao" formControlName="descricao">
 
-        <app-mensagem [control]="formulario.get('descricao')" erro="required" texto="Informe uma descrição.">
+        <app-mensagem [control]="formulario.get('descricao')" erro="campoObrigatorio" texto="Informe uma descrição.">
         </app-mensagem>
-        <app-mensagem [control]="formulario.get('descricao')" erro="minlength"
-          texto="Mínimo {{ formulario.get('descricao')?.errors?.minlength?.requiredLength }} caracteres.">
+        <app-mensagem [control]="formulario.get('descricao')" erro="tamanhoMinimo"
+          texto="Mínimo {{ formulario.get('descricao')?.errors?.tamanhoMinimo?.tamanho }} caracteres.">
         </app-mensagem>
       </div>
 
