@@ -1,15 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { DashboardRoutingModule } from './dashboard-routing.module';
-import { SharedModule } from 'primeng/components/common/shared';
+import { PanelModule } from 'primeng/panel';
+import { ChartModule } from 'primeng/chart';
+
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardRoutingModule } from './dashboard-routing.module';
+import { CompartilhadoModule } from '../compartilhado/compartilhado.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    SharedModule,
-    DashboardRoutingModule
+    CompartilhadoModule,
+    DashboardRoutingModule,
+    PanelModule,
+    ChartModule
   ],
   declarations: [DashboardComponent]
 })
