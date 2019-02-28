@@ -19,6 +19,7 @@ import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao
 import { AuthService } from '../seguranca/auth.service';
 import { JwtHelper } from 'angular2-jwt';
 import { NaoAutorizadoComponent } from './nao-autorizado/nao-autorizado.component';
+import { DashboardService } from '../dashboard/dashboard.service';
 
 @NgModule({
   imports: [
@@ -45,6 +46,7 @@ import { NaoAutorizadoComponent } from './nao-autorizado/nao-autorizado.componen
     CategoriaService,
     AuthService,
     ConfirmationService,
+    DashboardService,
     Title,
     JwtHelper,
     { provide: LOCALE_ID, useValue: 'pt' }
