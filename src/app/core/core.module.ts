@@ -20,6 +20,7 @@ import { AuthService } from '../seguranca/auth.service';
 import { JwtHelper } from 'angular2-jwt';
 import { NaoAutorizadoComponent } from './nao-autorizado/nao-autorizado.component';
 import { DashboardService } from '../dashboard/dashboard.service';
+import { RelatoriosService } from '../relatorios/relatorios.service';
 
 @NgModule({
   imports: [
@@ -47,6 +48,7 @@ import { DashboardService } from '../dashboard/dashboard.service';
     AuthService,
     ConfirmationService,
     DashboardService,
+    RelatoriosService,
     Title,
     JwtHelper,
     { provide: LOCALE_ID, useValue: 'pt' }
