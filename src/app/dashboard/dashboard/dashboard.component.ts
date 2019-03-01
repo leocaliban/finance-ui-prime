@@ -9,20 +9,7 @@ import { DashboardService } from '../dashboard.service';
 export class DashboardComponent implements OnInit {
 
   pieChartData: any;
-  lineChartData = {
-    labels: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-    datasets: [
-      {
-        label: 'Receitas',
-        data: [4, 10, 18, 5, 1, 20, 3],
-        borderColor: '#3366CC'
-      }, {
-        label: 'Despesas',
-        data: [10, 15, 8, 5, 1, 7, 9],
-        borderColor: '#D62B00'
-      }
-    ]
-  };
+  lineChartData: any;
 
   constructor(
     private dashboardService: DashboardService
@@ -30,6 +17,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.configurarGraficoPie();
+    this.configurarGraficoLine();
   }
 
   configurarGraficoPie() {
@@ -44,6 +32,62 @@ export class DashboardComponent implements OnInit {
             }
           ]
         };
+      });
+  }
+
+  configurarGraficoLine() {
+    this.dashboardService.lancamentosPorDia()
+      .then(dadosResponse => {
+        const diasDoMes = this.confnnigurarDiasMes();
+        const totaisReceitas = this.totaisPorCadaDiaMes(dadosResponse.filter(dado => dado.tipo === 'RECEITA'), diasDoMes);
+
+        const totaisDespesas = this.totaisPorCadaDiaMes(dadosResponse.filter(dado => dado.tipo === 'DESPESA'), diasDoMes);
+        this.lineChartData = {
+          labels: diasDoMes,
+          datasets: [
+            {
+              label: 'Receitas',
+              data: totaisReceitas,
+              borderColor: '#3366CC'
+            }, {
+              label: 'Despesas',
+              data: totaisDespesas,
+              borderColor: '#D62B00'
+            }
+          ]
+        };
       })
+  }
+
+  private totaisPorCadaDiaMes(dados, diasDoMes) {
+    const totais: number[] = [];
+    for (const dia of diasDoMes) {
+      let total = 0;
+      for (const dado of dados) {
+        if (dado.dia.getDate() === dia) {
+          total = dado.total;
+          break;
+        }
+      }
+      totais.push(total);
+    }
+    return totais;
+  }
+
+  private confnnigurarDiasMes() {
+    const mesReferencia = new Date();
+
+    mesReferencia.setMonth(mesReferencia.getMonth() + 1);
+    mesReferencia.setDate(0);
+
+    const quantidade = mesReferencia.getDate();
+
+    const dias: number[] = [];
+
+    for (let i = 1; i <= quantidade; i++) {
+      dias.push(i);
+    }
+
+    return dias;
   }
 }
