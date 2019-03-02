@@ -92,11 +92,12 @@
                     <td>{{contato.email}}</td>
                     <td>{{contato.telefone}}</td>
                     <td class="col-operacoes">
-                      <button pButton icon="pi pi-pencil" type="button" pTooltip="Editar" tooltipPosition="top"
-                        (click)="prepararEdicaoContato(contato, rowIndex)" class="ui-button-rounded"></button>
+                      <button class="ui-button-rounded" pButton icon="pi pi-pencil" type="button" pTooltip="Editar"
+                        tooltipPosition="top" (click)="prepararEdicaoContato(contato, rowIndex)">
+                      </button>
 
-                      <button pButton icon="pi pi-trash" type="button" pTooltip="Excluir" tooltipPosition="top"
-                        class="ui-button-rounded"></button>
+                      <button class="ui-button-rounded" pButton icon="pi pi-trash" type="button" pTooltip="Excluir"
+                        tooltipPosition="top" (click)="removerContato(rowIndex)"></button>
                     </td>
                   </tr>
                 </ng-template>
