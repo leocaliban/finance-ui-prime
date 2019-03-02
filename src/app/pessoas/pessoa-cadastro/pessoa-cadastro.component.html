@@ -67,13 +67,14 @@
 
         <app-mensagem [control]="estado" erro="required" texto="Informe o estado."></app-mensagem>
       </div>
-      <div class="ui-g-12">
-        <button pButton icon="pi pi-plus" label="Novo" type="button" class="ui-button-secondary ui-button-rounded"
-          (click)="prepararNovoContato()"></button>
-      </div>
+
       <div class="ui-g-12">
         <p-panel header="Contatos">
           <div class="ui-g">
+            <div class="ui-g-12">
+              <button pButton icon="pi pi-plus" label="Novo Contato" type="button"
+                class="ui-button-secondary ui-button-rounded" (click)="prepararNovoContato()"></button>
+            </div>
             <div class="ui-g-12">
               <p-table [value]="pessoa.contatos" [responsive]="true">
                 <ng-template pTemplate="header">
@@ -129,7 +130,7 @@
 </div>
 
 <p-dialog header="Novo Contato" [(visible)]="exibindoFormularioContato" modal="modal" *ngIf="contato">
-  <form #formularioContato="ngForm">
+  <form #formularioContato="ngForm" (ngSubmit)="confirmarContato(formularioContato)">
     <div class="ui-g-12 ui-fluid">
       <label>Nome</label>
       <input pInputText type="text" name="nome" required [(ngModel)]="contato.nome" #contatoNome="ngModel">
@@ -150,7 +151,7 @@
     </div>
 
     <div class="ui-g-12">
-      <button pButton icon="pi pi-plus" label="Novo" type="submit" class="ui-button-rounded"
+      <button pButton label="Confirmar" type="submit" class="ui-button-rounded"
         [disabled]="formularioContato.invalid"></button>
     </div>
   </form>
