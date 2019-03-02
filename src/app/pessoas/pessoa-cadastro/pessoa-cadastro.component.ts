@@ -6,6 +6,7 @@ import { MessageService } from 'primeng/api';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { Contato } from '../../core/domain/contato';
 
 @Component({
   selector: 'app-pessoa-cadastro',
@@ -15,6 +16,7 @@ import { Title } from '@angular/platform-browser';
 export class PessoaCadastroComponent implements OnInit {
 
   pessoa = new Pessoa();
+  contato: Contato;
   exibindoFormularioContato = false;
   constructor(
     private pessoaService: PessoaService,
@@ -35,6 +37,7 @@ export class PessoaCadastroComponent implements OnInit {
 
   prepararNovoContato() {
     this.exibindoFormularioContato = true;
+    this.contato = new Contato();
   }
 
   salvar(form: FormControl) {

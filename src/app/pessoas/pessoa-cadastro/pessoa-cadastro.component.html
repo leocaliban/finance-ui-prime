@@ -68,7 +68,8 @@
         <app-mensagem [control]="estado" erro="required" texto="Informe o estado."></app-mensagem>
       </div>
       <div class="ui-g-12">
-        <button pButton icon="pi pi-plus" label=Novo type="button" class="ui-button-secondary ui-button-rounded" (click)="prepararNovoContato()"></button>
+        <button pButton icon="pi pi-plus" label="Novo" type="button" class="ui-button-secondary ui-button-rounded"
+          (click)="prepararNovoContato()"></button>
       </div>
       <div class="ui-g-12">
         <p-panel header="Contatos">
@@ -90,11 +91,11 @@
                     <td>{{contato.email}}</td>
                     <td>{{contato.telefone}}</td>
                     <td class="col-operacoes">
-                      <button pButton icon="pi pi-pencil" type="button" pTooltip="Editar"
-                        tooltipPosition="top" class="ui-button-rounded"></button>
+                      <button pButton icon="pi pi-pencil" type="button" pTooltip="Editar" tooltipPosition="top"
+                        class="ui-button-rounded"></button>
 
-                      <button pButton icon="pi pi-trash" type="button" pTooltip="Excluir"
-                        tooltipPosition="top" class="ui-button-rounded"></button>
+                      <button pButton icon="pi pi-trash" type="button" pTooltip="Excluir" tooltipPosition="top"
+                        class="ui-button-rounded"></button>
                     </td>
                   </tr>
                 </ng-template>
@@ -127,6 +128,30 @@
 
 </div>
 
-<p-dialog header="Novo Contato" [(visible)]="exibindoFormularioContato" modal="modal">
+<p-dialog header="Novo Contato" [(visible)]="exibindoFormularioContato" modal="modal" *ngIf="contato">
+  <form #formularioContato="ngForm">
+    <div class="ui-g-12 ui-fluid">
+      <label>Nome</label>
+      <input pInputText type="text" name="nome" required [(ngModel)]="contato.nome" #contatoNome="ngModel">
+      <app-mensagem [control]="contatoNome" erro="required" texto="Informe o nome."></app-mensagem>
+    </div>
 
+    <div class="ui-g-12 ui-fluid">
+      <label>E-mail</label>
+      <input pInputText type="email" name="email" required email [(ngModel)]="contato.email" #contatoEmail="ngModel">
+      <app-mensagem [control]="contatoEmail" erro="required" texto="Informe o e-mail."></app-mensagem>
+      <app-mensagem [control]="contatoEmail" erro="email" texto="Informe um e-mail válido."></app-mensagem>
+    </div>
+
+    <div class="ui-g-12 ui-fluid">
+      <label>Telefone</label>
+
+      <p-inputMask name="telefone" [(ngModel)]="contato.telefone" mask="(99) 99999-999?9"></p-inputMask>
+    </div>
+
+    <div class="ui-g-12">
+      <button pButton icon="pi pi-plus" label="Novo" type="submit" class="ui-button-rounded"
+        [disabled]="formularioContato.invalid"></button>
+    </div>
+  </form>
 </p-dialog>
