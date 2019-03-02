@@ -67,7 +67,9 @@
 
         <app-mensagem [control]="estado" erro="required" texto="Informe o estado."></app-mensagem>
       </div>
-
+      <div class="ui-g-12">
+        <button pButton icon="pi pi-plus" label=Novo type="button" class="ui-button-secondary ui-button-rounded" (click)="prepararNovoContato()"></button>
+      </div>
       <div class="ui-g-12">
         <p-panel header="Contatos">
           <div class="ui-g">
@@ -88,9 +90,11 @@
                     <td>{{contato.email}}</td>
                     <td>{{contato.telefone}}</td>
                     <td class="col-operacoes">
-                      <button pButton icon="pi pi-pencil" type="button" pTooltip="Editar" tooltipPosition="top"></button>
+                      <button pButton icon="pi pi-pencil" type="button" pTooltip="Editar"
+                        tooltipPosition="top" class="ui-button-rounded"></button>
 
-                      <button pButton icon="pi pi-trash" type="button" pTooltip="Excluir" tooltipPosition="top"></button>
+                      <button pButton icon="pi pi-trash" type="button" pTooltip="Excluir"
+                        tooltipPosition="top" class="ui-button-rounded"></button>
                     </td>
                   </tr>
                 </ng-template>
@@ -122,3 +126,7 @@
   </form>
 
 </div>
+
+<p-dialog header="Novo Contato" [(visible)]="exibindoFormularioContato" modal="modal">
+
+</p-dialog>

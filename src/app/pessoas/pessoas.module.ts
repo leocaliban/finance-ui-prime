@@ -15,6 +15,7 @@ import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.compo
 import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.component';
 import { PessoaRoutingModule } from './pessoa-routing.module';
 import { PanelModule } from 'primeng/panel';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import { PanelModule } from 'primeng/panel';
     TableModule,
     TooltipModule,
     PanelModule,
+    DialogModule,
     PessoaRoutingModule
   ],
   declarations: [

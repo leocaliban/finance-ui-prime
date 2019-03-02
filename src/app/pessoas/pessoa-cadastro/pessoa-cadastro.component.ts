@@ -15,6 +15,7 @@ import { Title } from '@angular/platform-browser';
 export class PessoaCadastroComponent implements OnInit {
 
   pessoa = new Pessoa();
+  exibindoFormularioContato = false;
   constructor(
     private pessoaService: PessoaService,
     private errorHandler: ErrorHandlerService,
@@ -30,6 +31,10 @@ export class PessoaCadastroComponent implements OnInit {
     if (codigoPessoa) {
       this.carregarPessoa(codigoPessoa);
     }
+  }
+
+  prepararNovoContato() {
+    this.exibindoFormularioContato = true;
   }
 
   salvar(form: FormControl) {
