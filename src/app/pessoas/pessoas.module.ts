@@ -14,6 +14,7 @@ import { CompartilhadoModule } from './../compartilhado/compartilhado.module';
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
 import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.component';
 import { PessoaRoutingModule } from './pessoa-routing.module';
+import { PanelModule } from 'primeng/panel';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { PessoaRoutingModule } from './pessoa-routing.module';
     SelectButtonModule,
     TableModule,
     TooltipModule,
+    PanelModule,
     PessoaRoutingModule
   ],
   declarations: [
