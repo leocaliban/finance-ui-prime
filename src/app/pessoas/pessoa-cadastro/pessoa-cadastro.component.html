@@ -86,14 +86,14 @@
                   </tr>
                 </ng-template>
 
-                <ng-template pTemplate="body" let-contato>
+                <ng-template pTemplate="body" let-contato let-rowIndex="rowIndex">
                   <tr>
                     <td>{{contato.nome}}</td>
                     <td>{{contato.email}}</td>
                     <td>{{contato.telefone}}</td>
                     <td class="col-operacoes">
                       <button pButton icon="pi pi-pencil" type="button" pTooltip="Editar" tooltipPosition="top"
-                        class="ui-button-rounded"></button>
+                        (click)="prepararEdicaoContato(contato, rowIndex)" class="ui-button-rounded"></button>
 
                       <button pButton icon="pi pi-trash" type="button" pTooltip="Excluir" tooltipPosition="top"
                         class="ui-button-rounded"></button>
