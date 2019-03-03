@@ -11,4 +11,6 @@ export class Lancamento {
   tipo = 'RECEITA';
   pessoa = new Pessoa();
   categoria = new Categoria();
+  anexo: string;
+  urlAnexo: string;
 }

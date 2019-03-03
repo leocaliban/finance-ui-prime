@@ -50,6 +50,22 @@ export class LancamentoCadastroComponent implements OnInit {
   antesUploadAnexo(event: any) {
     event.xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('token'));
   }
+
+  aoTerminarUploadAnexo(event: any) {
+    const anexo = JSON.parse(event.xhr.response);
+    this.formulario.patchValue({
+      anexo: anexo.nome,
+      urlAnexo: anexo.url
+    });
+  }
+
+  get nomeAnexo() {
+    const nome = this.formulario.get('anexo').value;
+    if (nome) {
+      return nome.substring(nome.indexOf('_') + 1, nome.length);
+    }
+    return '';
+  }
   get urlUploadAnexo() {
     return this.lancamentoService.urlUploadAnexo();
   }
@@ -62,6 +78,8 @@ export class LancamentoCadastroComponent implements OnInit {
       dataPagamento: [],
       valor: [null, Validators.required],
       observacao: [],
+      anexo: [],
+      urlAnexo: [],
       tipo: ['RECEITA', Validators.required],
       pessoa: this.formBuilder.group({
         codigo: [null, Validators.required],

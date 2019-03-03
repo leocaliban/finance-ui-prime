@@ -71,10 +71,20 @@
           formControlName="observacao"></textarea>
       </div>
 
-      <div class="ui-g-6 ui-g-offset-6 ui-md-2 ui-md-offset-10 ui-fluid">
+      <div class="ui-g-6 ui-g-offset-6 ui-md-2 ui-md-offset-10 ui-fluid"
+        *ngIf="!formulario.get('anexo').value; else downloadAnexo">
         <p-fileUpload name="anexo" mode="basic" auto="true" maxFileSize="10000000" chooseLabel="Anexar"
-          accept="image/*, application/*" [url]="urlUploadAnexo" (onBeforeSend)="antesUploadAnexo($event)"></p-fileUpload>
+          accept="image/*,application/*" [url]="urlUploadAnexo" (onBeforeSend)="antesUploadAnexo($event)"
+          (onUpload)="aoTerminarUploadAnexo($event)">
+        </p-fileUpload>
       </div>
+
+      <ng-template #downloadAnexo>
+        <div class="ui-g-12 ui-fluid" dir="rtl">
+          <a target="_blank" pTooltip="Baixar anexo" tooltipPosition="top"
+            [href]="formulario.get('urlAnexo').value">{{nomeAnexo}}</a>
+        </div>
+      </ng-template>
 
       <div class="ui-g-12">
         <button pButton type="submit" label="Salvar" icon="fa fa-check" class="ui-button-rounded ui-button-success"
