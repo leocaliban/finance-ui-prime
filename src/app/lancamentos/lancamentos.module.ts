@@ -11,6 +11,7 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
 import { FileUploadModule } from 'primeng/fileupload';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 
@@ -36,6 +37,7 @@ import { LancamentosRoutingModule } from './lancamento-routing.module';
     TableModule,
     TooltipModule,
     FileUploadModule,
+    ProgressSpinnerModule,
     LancamentosRoutingModule
   ],
   declarations: [

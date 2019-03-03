@@ -74,12 +74,12 @@
       <div class="ui-g-6 ui-g-offset-6 ui-md-2 ui-md-offset-10 ui-fluid"
         *ngIf="!formulario.get('anexo').value; else downloadAnexo">
         <p-fileUpload name="anexo" mode="basic" auto="true" maxFileSize="10000000" chooseLabel="Anexar"
-          accept="image/*,application/*" [url]="urlUploadAnexo"
-          (onBeforeSend)="antesUploadAnexo($event)"
-          (onUpload)="aoTerminarUploadAnexo($event)"
-          (onError)="erroUpload()"
-          >
+          accept="image/*,application/*" [url]="urlUploadAnexo" (onBeforeSend)="antesUploadAnexo($event)"
+          (onUpload)="aoTerminarUploadAnexo($event)" (onError)="erroUpload()" [hidden]="uploadEmAndamento">
         </p-fileUpload>
+
+        <p-progressSpinner [style]="{width:'25px', height:'25px'}" [hidden]="!uploadEmAndamento"></p-progressSpinner>
+
       </div>
 
       <ng-template #downloadAnexo>
