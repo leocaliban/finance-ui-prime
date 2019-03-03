@@ -47,6 +47,12 @@ export class LancamentoCadastroComponent implements OnInit {
       this.carregarLancamento(codigoLancamento);
     }
   }
+  antesUploadAnexo(event: any) {
+    event.xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('token'));
+  }
+  get urlUploadAnexo() {
+    return this.lancamentoService.urlUploadAnexo();
+  }
 
   carregarFormulario() {
     this.formulario = this.formBuilder.group({

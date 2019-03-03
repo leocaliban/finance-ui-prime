@@ -10,6 +10,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
+import { FileUploadModule } from 'primeng/fileupload';
 
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 
@@ -34,6 +35,7 @@ import { LancamentosRoutingModule } from './lancamento-routing.module';
     SelectButtonModule,
     TableModule,
     TooltipModule,
+    FileUploadModule,
     LancamentosRoutingModule
   ],
   declarations: [

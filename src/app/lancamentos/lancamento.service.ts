@@ -23,6 +23,10 @@ export class LancamentoService {
     this.lancamentosUrl = `${environment.apiURL}/lancamentos`;
   }
 
+  urlUploadAnexo(): string {
+    return `${this.lancamentosUrl}/anexo`;
+  }
+
   salvar(lancamento: Lancamento): Promise<Lancamento> {
     return this.http.post(this.lancamentosUrl, JSON.stringify(lancamento))
       .toPromise()
