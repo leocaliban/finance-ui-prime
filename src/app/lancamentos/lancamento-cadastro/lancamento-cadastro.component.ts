@@ -59,6 +59,10 @@ export class LancamentoCadastroComponent implements OnInit {
     });
   }
 
+  erroUpload() {
+    this.mensagemErro('Erro ao tentar enviar anexo.');
+  }
+
   get nomeAnexo() {
     const nome = this.formulario.get('anexo').value;
     if (nome) {
@@ -172,6 +176,10 @@ export class LancamentoCadastroComponent implements OnInit {
 
   mensagemSucesso(detalhe: string) {
     this.messageService.add({ severity: 'success', summary: 'Sucesso!', detail: detalhe });
+  }
+
+  mensagemErro(detalhe: string) {
+    this.messageService.add({ severity: 'error', summary: 'Erro!', detail: detalhe });
   }
 
   get editando() {
