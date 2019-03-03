@@ -16,6 +16,7 @@ import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.co
 import { PessoaRoutingModule } from './pessoa-routing.module';
 import { PanelModule } from 'primeng/panel';
 import { DialogModule } from 'primeng/dialog';
+import { PessoaCadastroContatoComponent } from './pessoa-cadastro-contato/pessoa-cadastro-contato.component';
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import { DialogModule } from 'primeng/dialog';
   ],
   declarations: [
     PessoaCadastroComponent,
-    PessoasPesquisaComponent
+    PessoasPesquisaComponent,
+    PessoaCadastroContatoComponent
   ],
   exports: []
 })
