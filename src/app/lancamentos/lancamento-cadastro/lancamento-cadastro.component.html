@@ -91,7 +91,7 @@
 
       <div class="ui-g-12">
         <button pButton type="submit" label="Salvar" icon="fa fa-check" class="ui-button-rounded ui-button-success"
-          [disabled]="formulario.invalid">
+          [disabled]="formulario.invalid || uploadEmAndamento">
         </button>
 
         <button pButton type="button" label="Novo" icon="pi pi-plus" class="ui-button-rounded ui-button-info"
