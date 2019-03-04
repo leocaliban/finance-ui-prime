@@ -17,6 +17,8 @@ export class PessoaCadastroComponent implements OnInit {
 
   pessoa = new Pessoa();
   estados: any[];
+  cidades: any[];
+  estadoSelecionado: number;
 
   constructor(
     private pessoaService: PessoaService,
@@ -45,6 +47,21 @@ export class PessoaCadastroComponent implements OnInit {
         }));
       })
       .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  carregarCidades() {
+    this.pessoaService.pesquisarCidades(this.estadoSelecionado)
+      .then(response => {
+        this.cidades = response.map(cidade => ({
+          label: cidade.nome,
+          value: cidade.codigo
+        }));
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  possuiCidades() {
+    return this.cidades === undefined || this.cidades.length === 0 ? false : true;
   }
 
   salvar(form: FormControl) {
