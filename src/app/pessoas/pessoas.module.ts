@@ -9,14 +9,16 @@ import { InputTextModule } from 'primeng/inputtext';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
+import { DropdownModule } from 'primeng/dropdown';
+import { PanelModule } from 'primeng/panel';
+import { DialogModule } from 'primeng/dialog';
 
 import { CompartilhadoModule } from './../compartilhado/compartilhado.module';
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
 import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.component';
 import { PessoaRoutingModule } from './pessoa-routing.module';
-import { PanelModule } from 'primeng/panel';
-import { DialogModule } from 'primeng/dialog';
 import { PessoaCadastroContatoComponent } from './pessoa-cadastro-contato/pessoa-cadastro-contato.component';
+
 
 @NgModule({
   imports: [
@@ -31,6 +33,7 @@ import { PessoaCadastroContatoComponent } from './pessoa-cadastro-contato/pessoa
     TooltipModule,
     PanelModule,
     DialogModule,
+    DropdownModule,
     PessoaRoutingModule
   ],
   declarations: [

@@ -97,7 +97,7 @@ export class PessoaService {
 
   pesquisarCidades(estado): Promise<Cidade[]> {
     const params = new URLSearchParams();
-    params.set('estado', estado)
+    params.set('estado', estado);
     return this.http.get(this.cidadesUrl, {
       search: params
     })
