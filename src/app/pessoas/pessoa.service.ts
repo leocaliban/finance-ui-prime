@@ -3,6 +3,8 @@ import { URLSearchParams } from '@angular/http';
 import { Pessoa } from '../core/domain/pessoa';
 import { AuthHttp } from 'angular2-jwt';
 import { environment } from '../../environments/environment';
+import { Estado } from '../core/domain/estado';
+import { Cidade } from '../core/domain/cidade';
 
 export class PessoaFiltro {
   nome: string;
@@ -14,10 +16,14 @@ export class PessoaFiltro {
 export class PessoaService {
 
   pessoasUrl: string;
+  cidadesUrl: string;
+  estadosUrl: string;
 
   constructor(private http: AuthHttp) {
     this.pessoasUrl = `${environment.apiURL}/pessoas`;
-   }
+    this.cidadesUrl = `${environment.apiURL}/cidades`;
+    this.estadosUrl = `${environment.apiURL}/estados`;
+  }
 
   salvar(pessoa: Pessoa): Promise<Pessoa> {
     return this.http.post(this.pessoasUrl, JSON.stringify(pessoa))
@@ -81,5 +87,21 @@ export class PessoaService {
 
   mudarStatus(codigo: number, ativo: boolean): Promise<void> {
     return this.http.put(`${this.pessoasUrl}/${codigo}/ativo`, ativo).toPromise().then(() => null);
+  }
+
+  listarEstados(): Promise<Estado[]> {
+    return this.http.get(this.estadosUrl)
+      .toPromise()
+      .then(response => response.json());
+  }
+
+  pesquisarCidades(estado): Promise<Cidade[]> {
+    const params = new URLSearchParams();
+    params.set('estado', estado)
+    return this.http.get(this.cidadesUrl, {
+      search: params
+    })
+      .toPromise()
+      .then(response => response.json());
   }
 }
