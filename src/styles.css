@@ -8,6 +8,10 @@ label{
   font-weight: bold;
 }
 
+a, button{
+  margin-right: .25em !important;
+}
+
 .col-valor {
   width: 120px;
   text-align: right;
@@ -23,7 +27,7 @@ label{
 }
 
 .col-operacoes{
-  width: 110px;
+  width: 100px;
   text-align: center;
 }
 

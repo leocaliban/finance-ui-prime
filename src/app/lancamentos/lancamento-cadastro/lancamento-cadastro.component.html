@@ -47,7 +47,7 @@
       <div class="ui-g-12 ui-md-6 ui-fluid" formGroupName="categoria">
         <label for="categoria-id">Categoria</label>
 
-        <p-dropdown id="categoria-id" [options]="categorias" [autoWidth]="false" placeholder="Selecione"
+        <p-dropdown id="categoria-id" [options]="categorias" placeholder="Selecione"
           name="categoria" formControlName="codigo">
         </p-dropdown>
 
@@ -58,7 +58,7 @@
 
       <div class="ui-g-12 ui-md-6 ui-fluid" formGroupName="pessoa">
         <label for="pessoa-id">Pessoa</label>
-        <p-dropdown id="pessoa-id" [options]="pessoas" [autoWidth]="false" placeholder="Selecione" [filter]="true"
+        <p-dropdown id="pessoa-id" [options]="pessoas" placeholder="Selecione" [filter]="true"
           name="pessoa" formControlName="codigo"></p-dropdown>
 
         <app-mensagem [control]="formulario.get(['pessoa','codigo'])" erro="required" texto="Selecione uma pessoa.">
