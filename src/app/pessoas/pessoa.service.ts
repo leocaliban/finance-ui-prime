@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpParams } from '@angular/common/http';
+import { HttpParams, HttpHeaders } from '@angular/common/http';
 import { Pessoa } from '../core/domain/pessoa';
 import { environment } from '../../environments/environment';
 import { Estado } from '../core/domain/estado';
@@ -78,7 +78,10 @@ export class PessoaService {
   }
 
   mudarStatus(codigo: number, ativo: boolean): Promise<void> {
-    return this.http.put(`${this.pessoasUrl}/${codigo}/ativo`, ativo).toPromise().then(() => null);
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    return this.http.put(`${this.pessoasUrl}/${codigo}/ativo`, ativo, { headers: headers })
+      .toPromise().then(() => null);
   }
 
   listarEstados(): Promise<Estado[]> {
