@@ -1,19 +1,18 @@
 import { Injectable } from '@angular/core';
-import { AuthHttp } from 'angular2-jwt';
 import { environment } from './../../environments/environment';
+import { FinanceHttp } from '../seguranca/finance-http';
 
 @Injectable()
 export class CategoriaService {
 
   categoriasUrl: string;
 
-  constructor(private http: AuthHttp) {
+  constructor(private http: FinanceHttp) {
     this.categoriasUrl = `${environment.apiURL}/categorias`;
   }
 
   pesquisarTodos(): Promise<any> {
     return this.http.get(this.categoriasUrl)
-      .toPromise()
-      .then(response => response.json());
+      .toPromise();
   }
 }

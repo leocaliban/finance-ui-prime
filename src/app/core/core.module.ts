@@ -17,17 +17,20 @@ import { LancamentoService } from '../lancamentos/lancamento.service';
 import { PessoaService } from '../pessoas/pessoa.service';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { AuthService } from '../seguranca/auth.service';
-import { JwtHelper } from 'angular2-jwt';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { NaoAutorizadoComponent } from './nao-autorizado/nao-autorizado.component';
 import { DashboardService } from '../dashboard/dashboard.service';
 import { RelatoriosService } from '../relatorios/relatorios.service';
+import { FinanceHttp } from '../seguranca/finance-http';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
     CommonModule,
     ToastModule,
     ConfirmDialogModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule
   ],
   declarations: [
     NavbarComponent,
@@ -50,7 +53,8 @@ import { RelatoriosService } from '../relatorios/relatorios.service';
     DashboardService,
     RelatoriosService,
     Title,
-    JwtHelper,
+    JwtHelperService,
+    FinanceHttp,
     { provide: LOCALE_ID, useValue: 'pt' }
   ]
 })

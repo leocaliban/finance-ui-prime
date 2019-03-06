@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { AuthHttp } from 'angular2-jwt';
 import 'rxjs/operator/toPromise';
 import * as moment from 'moment';
+import { FinanceHttp } from '../seguranca/finance-http';
 
 @Injectable()
 export class DashboardService {
@@ -10,22 +10,21 @@ export class DashboardService {
   lancamentosUrl: string;
 
   constructor(
-    private http: AuthHttp
+    private http: FinanceHttp
   ) {
     this.lancamentosUrl = `${environment.apiURL}/lancamentos`;
   }
 
   lancamentosPorCategoria(): Promise<Array<any>> {
-    return this.http.get(`${this.lancamentosUrl}/estatistica/por-categoria`)
-      .toPromise()
-      .then(response => response.json());
+    return this.http.get<Array<any>>(`${this.lancamentosUrl}/estatistica/por-categoria`)
+      .toPromise();
   }
 
   lancamentosPorDia(): Promise<Array<any>> {
-    return this.http.get(`${this.lancamentosUrl}/estatistica/por-dia`)
+    return this.http.get<Array<any>>(`${this.lancamentosUrl}/estatistica/por-dia`)
       .toPromise()
       .then(response => {
-        const dados = response.json();
+        const dados = response;
         this.convertStringToDate(dados);
         return dados;
       });
@@ -36,5 +35,4 @@ export class DashboardService {
       dado.dia = moment(dado.dia, 'YYYY-MM-DD').toDate();
     }
   }
-
 }

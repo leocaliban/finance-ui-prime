@@ -1,7 +1,7 @@
 import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
-import { AuthHttp } from 'angular2-jwt';
 import { environment } from './../../environments/environment';
+import { FinanceHttp } from './finance-http';
 
 @Injectable()
 export class LogoutService {
@@ -9,7 +9,7 @@ export class LogoutService {
   tokensRevokeURL: string;
 
   constructor(
-    private http: AuthHttp,
+    private http: FinanceHttp,
     private authService: AuthService
   ) {
     this.tokensRevokeURL = `${environment.apiURL}/tokens/revoke`;

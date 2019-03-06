@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { Response } from '@angular/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { NotAuthenticatedError } from '../seguranca/finance-http';
 
 @Injectable()
@@ -20,16 +20,14 @@ export class ErrorHandlerService {
     } else if (errorResponse instanceof NotAuthenticatedError) {
       mensagem = 'Olá, sua sessão expirou, realize o login novamente.';
       this.router.navigate(['/login']);
-    } else if (errorResponse instanceof Response && errorResponse.status >= 400 && errorResponse.status <= 499) {
-      let erros;
+    } else if (errorResponse instanceof HttpErrorResponse && errorResponse.status >= 400 && errorResponse.status <= 499) {
       mensagem = 'Desculpe, ocorreu um erro ao processar a sua solicitação.';
 
       if (errorResponse.status === 403) {
         mensagem = 'Desculpe, você não possui permissões para realizar essa ação.';
       }
       try {
-        erros = errorResponse.json();
-        mensagem = erros[0].mensagemUsuario;
+        mensagem = errorResponse.error[0].mensagemUsuario;
       } catch (error) {
         console.error('Ocorreu um erro.', errorResponse);
       }

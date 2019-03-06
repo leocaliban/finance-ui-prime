@@ -11,7 +11,7 @@ import { AuthGuard } from './auth.guard';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { SegurancaRoutingModule } from './seguranca-routing.module';
 import { LogoutService } from './logout.service';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
